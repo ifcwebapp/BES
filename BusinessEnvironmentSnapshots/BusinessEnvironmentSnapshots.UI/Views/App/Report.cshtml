@@ -1,0 +1,74 @@
+﻿@model RootReport
+@{
+    ViewBag.PageCssQualifier = "as-country";
+    Layout = "~/Views/Shared/_StylesLayout.cshtml";
+}
+
+
+@section scripts {
+    @{
+        var countryCode = HttpContext.Current.Request.QueryString["countryCode"];
+        var baseHostAndPortUri = new Uri(HttpContext.Current.Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped));
+        var basePath = Url.Content("~");
+        var countryUrlTemplate = Url.Action("Country", "App", new { countryCode = "[country-code]" });
+    }
+    <script type="text/javascript">
+
+        var require = require || {};
+        require.config = require.config || {};
+        require.config['models/externals'] = {
+            baseApiUrl: '@basePath',
+            countryCode: '@this.Model.CountryCode',
+            countryUrlTemplate: '@countryUrlTemplate'
+        };
+
+    </script>
+    <script type="text/javascript"
+            src="@Url.Content("~/libs/requirejs/require.js")"
+            data-main="@Url.Content("~/Scripts/app/models/reporting/root.js")">
+    </script>
+}
+
+<div class="report" data-bind="foreach: pages">
+    <div class="report-page-container" data-bind="
+        variant: {
+            data: $data,
+            names: {
+                'title': 'titleReportPageTemplate',
+                'toc': 'tocReportPageTemplate',
+                'statistics': 'statisticsReportPageTemplate',
+                'charts': 'chartsReportPageTemplate'
+            }
+        }
+    ">
+    </div>
+</div>
+
+
+<div class="report-generate-container">
+    <div class="report-generate-backdrop"></div>
+    <div class="report-generate-placeholder">
+        <div class="report-generate-action-container" data-bind="
+            variant: {
+                data: controller,
+                names: {
+                    composing: 'composingReportControllerTemplate',
+                    available: 'availableReportControllerTemplate',
+                    working: 'workingReportControllerTemplate',
+                    finished: 'finishedReportControllerTemplate'
+                }
+            }
+        ">
+            <div>Loading data, please wait</div>
+        </div>
+    </div>
+</div>
+
+
+
+@{ Html.RenderPartial("~/views/app/charts.cshtml"); }
+@{ Html.RenderPartial("~/views/app/documents.cshtml"); }
+@{ Html.RenderPartial("~/views/app/projects.cshtml"); }
+@{ Html.RenderPartial("~/views/app/statistics.cshtml"); }
+@{ Html.RenderPartial("~/views/app/globals.cshtml"); }
+@{ Html.RenderPartial("~/views/app/ReportTemplates.cshtml"); }

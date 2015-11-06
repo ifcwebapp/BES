@@ -1,0 +1,15 @@
+﻿<script type="text/html" id="countriesContentTemplate">
+    <select data-bind="event: { change: whenChanged }">
+        <option value="">Select country</option>
+        <optgroup label="Low and middle income countries" data-bind="foreach: $root.toLowIncomeCountries($data)">
+            <option data-bind="value: value, text: text, attr: { selected: isSelected }"></option>
+        </optgroup>
+        <optgroup label="High income countries" data-bind="foreach: $root.toHighIncomeCountries($data)">
+            <option data-bind="value: value, text: text, attr: { selected: isSelected }"></option>
+        </optgroup>
+    </select>
+</script>
+
+<script type="text/html" id="nothingTemplate">
+</script>
+

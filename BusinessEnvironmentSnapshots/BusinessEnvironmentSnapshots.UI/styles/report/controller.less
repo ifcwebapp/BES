@@ -1,0 +1,38 @@
+﻿@import '../mixins';
+
+.report-generate-container {
+    position: fixed;
+    .mix-stretched();
+
+    .report-generate-backdrop {
+        position: absolute;
+        .mix-stretched();
+        background-color: #eee;
+        opacity: 0.75;
+    }
+
+    .report-generate-placeholder {
+        position: absolute;
+        top: 50%;
+        margin-top: -40px;
+        line-height: 60px;
+        left: 0px;
+        right: 0px;
+        background-color: white;
+        padding: 40px 0px;
+        border: solid 1px #ddd;
+        border-width: 1px 0px 1px 0px;
+        text-align: center;
+
+        .report-generate-action {
+            position: relative;
+            .mix-gradient(#06a, #06a, lighten(#06a, 10%));
+            margin: 0 auto;
+            font-size: 16px;
+            padding: 0 30px;
+            color: white;
+            border: solid 1px white;
+            border-radius: 3px;
+        }
+    }
+}

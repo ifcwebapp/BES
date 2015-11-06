@@ -1,0 +1,58 @@
+﻿<script type="text/html" id="projectPortfolioTabContentTemplate">
+    <!-- ko template: { 'name': 'tabContentTemplate' } --><!-- /ko -->
+</script>
+
+<script type="text/html" id="projectSectionTemplate">
+    <div class="block">
+        <div class="block-content as-project-portfolio">
+
+            <!-- ko if: $parentContext.$index() < 1 -->
+            <div class="block-intro">
+                The following projects and knowledge products represent recent and ongoing work in the economy,
+                within the Trade and Competitiveness Global Practice of the World Bank Group.
+            </div>
+            <!-- /ko -->
+
+            <div class="section">
+                <div class="section-name" data-bind="text: name"></div>
+                <div class="section-description" data-bind="visible: description, text: description"></div>
+                <!-- ko ifnot: projects().length -->
+                <div class="section-no-data-message">No recent projects</div>
+                <!-- /ko -->
+                <!-- ko if: projects().length -->
+                <table class="grid as-interleaved" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="grid-cell as-project-title">Project Title</th>
+                            <th class="grid-cell as-project-id">Project ID</th>
+                            <th class="grid-cell as-project-approval-date">Approval Date</th>
+                            <th class="grid-cell as-project-status">Status</th>
+                            <!-- ko ifnot: projectType === 'Knowledge Product' -->
+                            <th class="grid-cell as-project-commitment-amount">Commitment Amount</th>
+                            <!-- /ko -->
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: projects">
+                        <tr>
+                            <!-- ko if: projectLink -->
+                            <td><a data-bind="attr: { href: projectLink }, text: projectName"></a></td>
+                            <!-- /ko -->
+                            <!-- ko ifnot: projectLink -->
+                            <td data-bind="text: projectName"></td>
+                            <!-- /ko -->
+                            <td data-bind="text: projectId"></td>
+                            <td style="text-align: right" data-bind="text: $root.formatDate($root.parseDate(approvalDate))"></td>
+                            <td style="text-align: right" data-bind="text: projectStatus"></td>
+                            <!-- ko ifnot: projectType === 'Knowledge Product' -->
+                            <td style="text-align: right" data-bind="text: $root.formatMoney(amount)"></td>
+                            <!-- /ko -->
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="block-shade"></div>
+    </div>
+
+</script>

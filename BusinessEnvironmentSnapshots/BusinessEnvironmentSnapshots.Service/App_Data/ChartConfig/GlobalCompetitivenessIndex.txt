@@ -1,0 +1,5 @@
+﻿Years=LastRecent-MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Global Competitiveness Index
+IndicatorName=Global Competitiveness Index (rank)

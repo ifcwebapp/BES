@@ -1,0 +1,8 @@
+Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=In past year due to adverse regulatory changes: Withdraw existing investment
+IndicatorName=In past year due to adverse regulatory changes: Cancel planned investments
+IndicatorName=In past year due to adverse regulatory changes: Both withdraw and cancel
+IndicatorName=In past year due to adverse regulatory changes: Neither withdraw nor cancel
+IndicatorName=In past year due to adverse regulatory changes: Don't know

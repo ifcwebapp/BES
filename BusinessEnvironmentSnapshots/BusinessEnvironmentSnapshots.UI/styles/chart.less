@@ -1,0 +1,133 @@
+﻿@import 'mixins';
+@import 'chart/legend';
+
+.chart-label {
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    margin-top: -14px;
+    margin-left: 7px;
+    display: none;
+    background-color: black;
+    white-space: nowrap;
+    border: solid 1px white;
+    padding: 5px;
+    text-align: left;
+    color: white;
+    .mix-tip(left-top, 13px, 6px, 1px, white, black);
+    font-size: @chart-value-label-font-size;
+}
+
+.chart-point, .chart-bar, .chart-arc {
+    &.as-hovered {
+        stroke-width: 2px;
+        stroke: black;
+    }
+
+    &.as-hidden {
+        display: none;
+    }
+}
+
+.chart-name {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.chart-description {
+    font-size: 14px;
+    color: #333;
+}
+
+.chart-note {
+    margin-top: @row-spacing / 2;
+}
+
+.chart-link {
+    margin-top: @row-spacing / 2;
+}
+
+.chart-category {
+    fill: black;
+    font-size: @chart-value-label-font-size;
+}
+
+.chart-bar {
+}
+
+.chart-container {
+    margin-top: 40px;
+    
+}
+
+.chart-container.as-unfinished {
+    .chart {
+        height: @chart-stub-height;
+    }
+}
+
+.chart-container.as-problem {
+    .chart {
+        height: @chart-stub-height;
+    }
+
+    background-color: @light-problem-background-color;
+    color: @problem-color;
+}
+
+.chart-container.as-empty {
+    .chart {
+        height: @chart-stub-height;
+    }
+
+    background-color: @light-empty-background-color;
+    color: @empty-color;
+}
+
+.chart-data {
+    background-color: white; // <-- for exporting to image
+    .mix-clearfix();
+}
+
+.chart-graph {
+    margin-top: 20px;
+    position: relative;
+    width: @chart-width;
+    display: inline-block;
+    float: left;
+}
+
+.chart-graph-canvas {
+}
+
+.chart-table {
+    margin-top: 20px;
+    display: inline-block;
+    float: left;
+}
+.chart-table-unit-label {
+    text-align: right;
+}
+
+.chart-graph + .chart-table {
+    margin-left: @column-spacing;
+}
+
+.chart-table-grid.grid.as-for-chart {
+    max-width: @chart-table-width;
+    .grid-row.as-series-names {
+        background-color: #efefef;
+        .grid-row.as-series-names {
+            text-align: center;
+        }
+    }
+
+    td.as-value {
+        text-align: center;
+        background-color: #FAFAFA;
+    }
+}
+.grid.as-for-chart .grid-row.as-series-names .grid-cell {
+}

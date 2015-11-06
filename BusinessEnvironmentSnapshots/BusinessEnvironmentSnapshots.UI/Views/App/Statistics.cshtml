@@ -1,0 +1,61 @@
+﻿<script type="text/html" id="statisticsSourceTemplate">
+    <ul data-bind="foreach: $data">
+        <li>
+            <div data-bind="text: title"></div>
+            <a href="#" data-bind="attr: { 'href': sourceLink }, text: sourceName"></a>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="statisticsTemplate">
+    <div class="statistics">
+        <div class="statistics-parts" data-bind="
+        foreach: (function(){
+            var values = $data.stats;
+            return Object.keys(values).reduce(
+                function(result, key) {
+                    var value = values[key];
+                    if (value.countryValue != null || value.countryYear != null || value.regionValue != null || value.regionYear != null) {
+                        result.push(values[key]);
+                    }
+                    return result;
+                },
+                []
+            );
+        })()
+        ">
+            <div class="statistics-part-container">
+                <div class="statistics-part">
+                    <div data-bind="text: title"></div>
+                    <div class="statistics-values">
+                        <div class="statistics-country-values">
+                            <div class="statistics-value" data-bind="text: $root.formatStatValue(countryValue, valueSuffix)"></div>
+                            <div class="statistics-country-year" data-bind="text: countryYear"></div>
+                        </div>
+                        <div class="statistics-region-values">
+                            <div class="statistics-value" data-bind="text: $root.formatStatValue(regionValue, valueSuffix)"></div>
+                            <div class="statistics-region-name" data-bind="text: regionName"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="statistics-source">
+            Source: <a href="#" target="_blank" data-bind="
+                attr: { 'href': '#' },
+                text: '?',
+                click: function(_, e) {
+                    $root.lightbox({
+                        targetElement: e.target,
+                        data: {
+                            'statistics-source': (function(){
+                                var values = $data.stats;
+                                return Object.keys(values).map(function(key) { return values[key]; });
+                            })()
+                        }
+                    });
+                }
+            "></a>
+        </div>
+    </div>
+</script>

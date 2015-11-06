@@ -1,0 +1,4 @@
+﻿Years=2000-MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Domestic credit to private sector (% of GDP)

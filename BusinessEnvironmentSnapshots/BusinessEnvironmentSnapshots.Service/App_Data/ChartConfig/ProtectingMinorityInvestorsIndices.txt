@@ -1,0 +1,9 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Protecting Minority Investors: Extent of corporate transparency index (0-9)
+IndicatorName=Protecting Minority Investors: Strength of governance structure index (0-10.5)
+IndicatorName=Protecting Minority Investors: Extent of shareholder rights index (0-10.5)
+IndicatorName=Protecting Minority Investors: Ease of shareholder suits index (0-10)
+IndicatorName=Protecting Minority Investors: Extent of director liability index (0-10)
+IndicatorName=Protecting Minority Investors: Extent of disclosure index (0-10)

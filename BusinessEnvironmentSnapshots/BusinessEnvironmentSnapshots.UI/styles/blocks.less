@@ -1,0 +1,48 @@
+﻿@import 'mixins';
+
+.block {
+    text-align: center;
+    position: relative;
+}
+
+.block.as-delimiting {
+    border-top: solid 2px @border-color;
+}
+
+.block-shade {
+    border-top: solid 1px @border-color;
+    margin: 0 auto;
+    text-align: left;
+    .mix-gradient(white, white, @tab-background-color);
+}
+
+.block-content {
+    position: relative;
+    margin: 0 auto;
+    text-align: left;
+    width: @block-content-width;
+}
+
+.block {
+    &>.block-content {
+        z-index: 1;
+    }
+    &>.block-shade {
+        z-index: 0;
+    }
+}
+
+.block.as-wider {
+    margin-top: @row-spacing;
+    .block-shade, .block-content {
+        width: @block-wide-content-width;
+    }
+}
+
+.block-content + .block-shade {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 200px;
+}

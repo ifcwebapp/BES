@@ -1,0 +1,5 @@
+Years=2006,MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Starting a Business: Cost (% of income per capita)
+IndicatorName=Starting a Business: Rank

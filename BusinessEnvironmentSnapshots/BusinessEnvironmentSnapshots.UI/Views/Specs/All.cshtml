@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_SpecsLayout.cshtml";
+    var scriptsPath = Url.Content("~/Scripts");
+}
+
+@section tests {
+    <script type="text/javascript">
+        function runTests(env, htmlReporter) {
+            require([@Html.Raw(String.Join(", ", System.IO.Directory.EnumerateFiles(
+                    HttpContext.Current.Server.MapPath("~/Scripts/app/specs"),
+                    "*.js"
+                ).Select(
+                    x => "'" + scriptsPath + "/app/specs/" + Path.GetFileName(x).Replace("\\", "/") + "'"
+                ).ToArray()))], function (specs) {
+
+                htmlReporter.initialize();
+                env.execute();
+            });
+        }
+    </script>
+}
+

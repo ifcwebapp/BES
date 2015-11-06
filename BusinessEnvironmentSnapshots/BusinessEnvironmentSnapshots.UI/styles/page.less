@@ -1,0 +1,181 @@
+﻿@import 'mixins';
+
+.lightbox-backdrop {
+    //background-color:black;
+    //opacity: 0.5;
+    position: fixed;
+    z-index: 1;
+    .mix-stretched();
+}
+
+.lightbox {
+    position: absolute;
+    z-index: 1000;
+    margin-left: 5px;
+    top: 0px;
+    left: 0px;
+    border: solid 1px @border-color;
+    .mix-tip(left-top, 9px, 5px, 1px, @border-color, white);
+    background-color: white;
+    padding: 3px 5px;
+    .mix-rounded(4px);
+    .mix-shadow(5px, 5px, 2px, 0.1);
+}
+
+
+.page {
+    position: relative;
+}
+
+.page-links {
+    list-style-type: square;
+    list-style-position: outside;
+    margin-left: -17px;
+}
+
+.page-link {
+    margin-left: 0px;
+    padding-left: 0px;
+    text-indent: 0px;
+}
+
+.page-link + .page-link {
+    margin-top: 10px;
+}
+
+.header {
+    margin-top: 10px;
+}
+
+.header-logo {
+    padding-bottom: 5px;
+    border-bottom: solid 4px black;
+}
+
+.footer-logo {
+    padding-bottom: 5px;
+    padding-right: 30px;
+    width: 225px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.footer {
+    margin-top: 40px;
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.wbg-partners {
+    border-bottom: solid 1px grey;
+}
+
+.worldbank-partner {
+    border-left: 1px solid black;
+    margin: 10px;
+    padding-left: 20px;
+
+    a {
+        color: black;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+}
+
+.wbg-misc-links, .hotlineNumber, .hotlineNumberPhone, .copyright {
+    margin-top: 5px;
+}
+
+.hotlineNumber {
+    a {
+        color: black;
+        font-weight: bold;
+    }
+}
+
+.links {
+    span {
+        color: black;
+    }
+}
+
+.header-menu {
+    margin-top: 10px;
+}
+
+.header-menu-item {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.header-menu-item:hover, .header-menu-item.as-active {
+    &::after {
+        .mix-tab-line();
+        bottom: -2px;
+        height: 2px;
+    }
+}
+
+.header-menu-item + .header-menu-item {
+    margin-left: 20px;
+}
+
+.header-menu-item-link {
+    .mix-reset-text();
+}
+
+.page-title {
+    color: #000;
+    margin-top: 50px;
+    font-size: 30px;
+    line-height: 30px;
+
+}
+.page-title-action {
+    .mix-reset-text();
+}
+
+
+table.banner {
+    width: 100%;
+    height: 100%;
+
+    td {
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        height: 100%;
+
+        div {
+            padding: 0px 20px;
+        }
+    }
+}
+
+.tabs-navigation {
+    padding-top: @row-spacing * 2;
+    .mix-clearfix();
+    .tabs-navigation-previous {
+        float:left;
+    }
+    .tabs-navigation-next {
+        float:right;
+    }
+}

@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_SpecsLayout.cshtml";
+    var scriptsPath = Url.Content("~/Scripts");
+}
+
+@section tests {
+    <script type="text/javascript">
+        function runTests(env, htmlReporter) {
+            require(['@scriptsPath/app/specs/@(Model.Path)-spec.js'], function (specs) {
+
+                htmlReporter.initialize();
+                env.execute();
+
+            });
+        }
+    </script>
+}

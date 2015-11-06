@@ -1,0 +1,50 @@
+﻿@import 'mixins';
+
+table.grid {
+
+    th, td {
+        padding: 8px 12px;
+    }
+
+    thead {
+        th, td {
+            border-right: solid 1px @border-color;
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        th {
+            font-weight: normal;
+        }
+    }
+
+    tbody {
+        td {
+            border-top: solid 1px @border-color;
+        }
+    }
+}
+
+table.grid.as-interleaved {
+    tbody {
+        tr:nth-child(odd) {
+            background-color: @table-odd-background-color;
+        }
+    }
+}
+
+table.grid.as-bordered {
+
+    thead, tbody, tfoot {
+
+        th, td {
+            border: solid 1px @border-color;
+        }
+
+        th:last-child, td:last-child {
+            border: solid 1px @border-color;
+        }
+    }
+}

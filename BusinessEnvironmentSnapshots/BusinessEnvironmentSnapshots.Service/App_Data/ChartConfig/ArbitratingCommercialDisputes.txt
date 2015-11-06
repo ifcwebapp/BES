@@ -1,0 +1,6 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Arbitrating Commercial Disputes: Extent of judicial assistance index (0 = min, 100 = max)
+IndicatorName=Arbitrating Commercial Disputes: Ease of process index (0 = min, 100 = max)
+IndicatorName=Arbitrating Commercial Disputes: Strength of laws index (0 = min, 100 = max)

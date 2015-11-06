@@ -1,0 +1,18 @@
+﻿Years=MostRecent
+[Indicators]
+IndicatorName=Most problematic factors: Access to financing
+IndicatorName=Most problematic factors: Corruption
+IndicatorName=Most problematic factors: Crime and theft
+IndicatorName=Most problematic factors: Foreign currency regulations
+IndicatorName=Most problematic factors: Government instability/coups
+IndicatorName=Most problematic factors: Inadequate supply of infrastructure
+IndicatorName=Most problematic factors: Inadequately educated workforce
+IndicatorName=Most problematic factors: Inefficient government bureaucracy
+IndicatorName=Most problematic factors: Inflation
+IndicatorName=Most problematic factors: Insufficient capacity to innovate
+IndicatorName=Most problematic factors: Policy instability
+IndicatorName=Most problematic factors: Poor public health
+IndicatorName=Most problematic factors: Poor work ethic in national labor force
+IndicatorName=Most problematic factors: Restrictive labor regulations
+IndicatorName=Most problematic factors: Tax rates
+IndicatorName=Most problematic factors: Tax regulations

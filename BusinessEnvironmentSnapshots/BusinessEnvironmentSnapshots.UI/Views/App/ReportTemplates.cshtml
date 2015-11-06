@@ -1,0 +1,121 @@
+﻿<script type="text/html" id="titleReportPageTemplate">
+    <div class="report-page as-title">
+        <img class="report-title-backdrop-top" src="@Url.Content("~/content/reporting/floating-market-top.png")">
+        <img class="report-title-backdrop-bottom" src="@Url.Content("~/content/reporting/floating-market-bottom.png")">
+        <div class="report-title-title-container">
+            <div class="report-title-app-name">INVESTMENT CLIMATE SNAPSHOT</div>
+            <div class="report-title-title-flag">
+                <div class="report-title-title-flag-name" data-bind="text: countryName"></div>
+                <img data-bind="attr: {'src' : '@Url.Content("~/styles/country-flags/")' + countryCode + '.gif'}" src="@Url.Content("~/styles/country-flags/flag.png")">
+            </div>
+        </div>
+        <div class="report-title-logo-container">
+            <div class="report-title-logo" data-bind="template: 'worldBankLogoTemplate'"></div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="statisticsReportPageTemplate">
+    <div class="report-page as-statistics">
+        <img class="report-statistics-backdrop" src="@Url.Content("~/content/reporting/picking-coffee-beans.png")" />
+        <div class="report-statistics">
+            <div class="report-statistics-header" data-bind="text: 'Key statistics for ' + countryName">
+                @*<span class="report-statistics-header-highlight">for <span class="report-statistics-header-highlight">Kenya</span></span>*@
+            </div>
+            <div class="report-statistics-data" data-bind="template: { name: 'statisticsTemplate', data: statistics }"></div>
+        </div>
+        <div class="report-page-footer">FURL:icsnapshots</div>
+    </div>
+</script>
+
+<script type="text/html" id="tocReportPageTemplate">
+    <div class="report-page as-toc">
+        <div class="report-toc-backdrop"></div>
+        <div class="report-toc-title">Contents</div>
+        <div class="report-toc-content">
+            <table>
+                <tbody data-bind="foreach: content">
+                    <tr>
+                        <td class="report-toc-body-name" data-bind="text: name"></td>
+                        <td class="report-toc-body-page" data-bind="text: index"></td>
+                        <td class="report-toc-body-description" data-bind="text: description"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="report-page-footer">FURL:icsnapshots</div>
+    </div>
+</script>
+
+<script type="text/html" id="chartsReportPageTemplate">
+    <div class="report-page" data-bind="
+        overflown: isOverflown,
+        click: function() { done()(); },
+        css: { 'as-being-shrunken': beingShrunken() },
+        foreach: blocks
+    ">
+        <div class="page-number-container" @*data-bind="css: $parentContext.$index() % 2 === 0 ? 'as-left' : 'as-right'"*@>
+            <div class="page-number" data-bind="text: $parentContext.$index() + ' | INVESTMENT CLIMATE SNAPSHOT'"></div>
+            <div class="page-number-highlighted" data-bind="text: 'for ' + $root.country.name.toUpperCase()"></div>
+        </div>
+        <!-- ko variant: { data: $data, names: {
+            'chart': 'chartTemplate',
+            'section': 'sectionReportPageBlockTemplate'
+        } } -->
+        <!-- /ko -->
+        <div class="report-page-footer">FURL:icsnapshots</div>
+    </div>
+</script>
+
+<script type="text/html" id="sectionReportPageBlockTemplate">
+    <div class="report-block-section-container">
+        <div class="report-block-section">
+            <div class="report-block-section-name" data-bind="text: name"></div>
+            <div class="report-block-section-description" data-bind="text: description"></div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="worldBankLogoTemplate">
+    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="250" height="50" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+    <g transform="scale(0.55)">
+    <polygon fill="white" fill-rule="nonzero" points="105,71 108,71 108,56 105,56 " />
+    <path fill="white" fill-rule="nonzero" d="M116 68c2,0 3,0 3,-2 0,-1 -1,-2 -3,-2l-3 0 0 4 3 0zm0 -6c1,0 2,-1 2,-2 0,-1 -1,-2 -3,-2l-2 0 0 4 3 0zm-5 9l0 -15 5 0c3,0 5,1 5,4 0,2 -2,3 -2,3l0 0c1,0 3,1 3,3 0,3 -2,5 -5,5l-6 0z" />
+    <path fill="white" fill-rule="nonzero" d="M129 63c1,0 3,-1 3,-3 0,-1 -1,-2 -3,-2l-2 0 0 5 2 0zm7 7c0,0 0,1 -1,1 -5,0 -4,-6 -7,-6l-1 0 0 6 -3 0 0 -15 5 0c4,0 6,1 6,4 0,3 -2,4 -3,4 2,1 2,4 4,4l0 0 0 2z" />
+    <path fill="white" fill-rule="nonzero" d="M142 68c3,0 4,-2 4,-5 0,-3 -1,-5 -4,-5l-2 0 0 10 2 0zm-5 3l0 -15 5 0c4,0 7,2 7,7 0,6 -3,8 -7,8l-5 0z" />
+    <path fill="white" fill-rule="nonzero" d="M158 67c-2,0 -3,-1 -3,-3 0,-1 1,-2 3,-2 1,0 3,1 3,2 0,2 -2,3 -3,3z" />
+    <polygon fill="white" fill-rule="nonzero" points="167,56 170,56 170,71 167,71 " />
+    <path fill="white" fill-rule="nonzero" d="M178 68c2,0 4,-2 4,-5 0,-3 -2,-5 -5,-5l-1 0 0 10 2 0zm-5 3l0 -15 4 0c4,0 8,2 8,7 0,6 -3,8 -7,8l-5 0z" />
+    <path fill="white" fill-rule="nonzero" d="M190 65l4 0 -2 -6 -2 6zm4 2l-5 0 -1 4 -3 0 5 -15 3 0 6 15 -3 0 -2 -4z" />
+    <polygon fill="white" fill-rule="nonzero" points="97,20 119,20 119,24 111,24 111,47 105,47 105,24 97,24 " />
+    <polygon fill="white" fill-rule="nonzero" points="122,47 122,20 128,20 128,30 139,30 139,20 145,20 145,47 139,47 139,35 128,35 128,47 " />
+    <polygon fill="white" fill-rule="nonzero" points="149,20 168,20 168,24 155,24 155,30 167,30 167,35 155,35 155,42 168,42 168,47 149,47 " />
+    <polygon fill="white" fill-rule="nonzero" points="197,20 203,20 208,40 208,40 213,20 218,20 211,47 205,47 200,26 200,26 194,47 188,47 181,20 187,20 191,40 191,40 " />
+    <path fill="white" fill-rule="nonzero" d="M226 33c0,5 2,10 7,10 6,0 7,-5 7,-10 0,-5 -1,-10 -7,-10 -5,0 -7,5 -7,10zm-6 0c0,-8 4,-14 13,-14 9,0 13,6 13,14 0,8 -4,14 -13,14 -9,0 -13,-6 -13,-14z" />
+    <path fill="white" fill-rule="nonzero" d="M256 31l5 0c3,0 4,-1 4,-3 0,-3 -1,-4 -4,-4l-5 0 0 7zm0 16l-6 0 0 -27 12 0c5,0 9,1 9,7 0,3 -2,6 -5,6l0 0c4,1 4,4 5,7 0,2 0,5 1,7l-6 0c-1,-3 -1,-5 -1,-8 0,-1 -1,-3 -3,-3l-6 0 0 11z" />
+    <polygon fill="white" fill-rule="nonzero" points="276,47 276,20 282,20 282,42 294,42 294,47 " />
+    <path fill="white" fill-rule="nonzero" d="M303 42l3 0c7,0 8,-4 8,-9 0,-4 -1,-9 -8,-9l-3 0 0 18zm-6 -22l9 0c9,-1 14,4 14,13 0,10 -5,14 -14,14l-9 0 0 -27z" />
+    <path fill="white" fill-rule="nonzero" d="M345 30c3,0 4,-1 4,-3 0,-2 -1,-3 -4,-3l-4 0 0 6 4 0zm0 12c3,0 5,0 5,-3 0,-3 -2,-4 -5,-4l-4 0 0 7 4 0zm-10 5l0 -27 10 0c5,-1 10,1 10,7 0,3 -2,5 -5,6l0 0c3,0 6,3 6,7 0,5 -7,7 -11,7l-10 0z" />
+    <path fill="white" fill-rule="nonzero" d="M375 37l-4 -12 0 0 -4 12 8 0zm-17 10l10 -27 7 0 9 27 -6 0 -2 -6 -11 0 -2 6 -5 0z" />
+    <polygon fill="white" fill-rule="nonzero" points="403,47 393,24 393,24 393,47 387,47 387,20 396,20 406,41 406,41 406,20 412,20 412,47 " />
+    <polygon fill="white" fill-rule="nonzero" points="422,31 423,31 432,20 438,20 428,32 439,47 439,47 432,47 423,33 422,33 422,47 417,47 417,20 422,20 " />
+    <path fill="white" d="M0 44l0 0c0,4 1,8 2,12l0 0c0,0 0,0 0,1l0 0c0,0 0,0 0,0l0 0c5,18 22,31 42,31 9,0 17,-3 24,-8l0 0c0,0 0,0 1,0l0 0c0,0 0,-1 1,-1l0 0c8,-6 14,-15 16,-25l0 0c0,0 1,0 1,-1l0 0c0,0 0,0 0,0l0 0c0,-3 1,-6 1,-9l0 0c0,-6 -2,-12 -4,-17l0 0c0,-1 -1,-2 -3,-1l0 0c-1,0 -1,1 -1,2l0 0c2,5 4,10 4,16l0 0c0,3 -1,6 -2,9l0 0c0,2 -1,4 -3,6l0 0c0,-1 0,-2 0,-2l0 0c0,-8 -2,-17 -6,-24l0 0c3,-3 5,-6 6,-9l0 0c0,-1 -1,-3 -2,-3l0 0c-1,0 -2,1 -2,2l0 0c-1,2 -2,4 -4,6l0 0c0,-1 -1,-2 -2,-3l0 0c-3,-5 -8,-10 -12,-13l0 0c6,0 12,2 16,4l0 0c1,1 2,1 3,0l0 0c0,-1 0,-2 0,-3l0 0c-7,-9 -18,-14 -32,-14l0 0c-24,0 -44,20 -44,44zm45 -38c-2,-1 -4,-1 -6,-2l0 0c2,0 3,0 5,0l0 0c0,0 1,1 2,3l0 0c0,-1 -1,-1 -1,-1zm4 -2c2,1 4,1 5,1l0 0c-1,1 -2,2 -3,3l0 0c-1,-2 -1,-3 -2,-4zm7 5c2,-1 3,-2 4,-2l0 0c2,1 4,2 6,3l0 0c-3,-1 -7,-1 -10,-1zm-33 5c1,-2 2,-4 4,-5l0 0c4,-2 10,-2 16,1l0 0c-3,0 -5,1 -7,1l0 0c-5,2 -9,3 -13,6l0 0c0,-1 0,-2 0,-3zm-4 -1c0,0 0,0 0,0l0 0c0,2 0,4 0,6l0 0c-4,3 -8,7 -11,11l0 0c-1,1 -2,2 -3,3l0 0c3,-8 8,-15 14,-20zm9 13c-2,-2 -3,-4 -4,-5l0 0c4,-3 8,-4 13,-6l0 0c2,-1 5,-1 8,-2l0 0c-4,5 -8,10 -12,17l0 0c-2,-2 -3,-3 -5,-4zm17 8c-3,-1 -5,-1 -8,-3l0 0c4,-6 8,-12 12,-16l0 0c1,5 2,12 3,20l0 0c-2,0 -4,0 -7,-1zm8 -19c5,4 9,8 13,14l0 0c1,1 1,2 2,3l0 0c-3,1 -8,3 -12,3l0 0c0,-7 -1,-14 -3,-20zm-40 38c-4,-3 -6,-6 -7,-10l0 0c1,-3 2,-7 5,-11l0 0c3,-3 6,-6 10,-9l0 0c1,2 2,4 4,6l0 0c2,1 4,3 6,4l0 0c0,1 -1,3 -1,4l0 0c-4,7 -7,15 -9,22l0 0c-3,-1 -6,-3 -8,-6zm26 13c-5,-1 -10,-3 -14,-5l0 0c1,-6 4,-14 8,-22l0 0c1,-2 1,-3 2,-4l0 0c3,1 6,2 10,3l0 0c2,1 5,1 7,1l0 0c0,2 0,3 0,5l0 0c0,9 -1,17 -2,24l0 0c-3,-1 -7,-1 -11,-2zm17 -22c0,-2 0,-3 0,-5l0 0c5,0 10,-2 14,-4l0 0c3,7 5,15 5,22l0 0c0,2 0,4 0,5l0 0c-2,1 -4,2 -7,3l0 0c-4,2 -9,2 -14,3l0 0c2,-8 2,-16 2,-24zm-50 11c-1,-2 -1,-3 -1,-4l0 0c1,2 3,3 5,5l0 0c3,3 6,5 10,8l0 0c0,4 -1,8 0,11l0 0c-7,-5 -12,-12 -14,-20zm21 25c-1,0 -1,-1 -1,-1l0 0c-2,-1 -3,-6 -2,-14l0 0c5,2 9,4 14,5l0 0c4,1 8,1 11,2l0 0c-1,7 -4,11 -5,11l0 0c0,0 0,1 0,1l0 0c-7,-1 -12,-2 -17,-4zm27 -8c5,0 11,-1 16,-3l0 0c1,0 2,-1 3,-1l0 0c-1,3 -3,6 -6,8l0 0c-5,4 -11,6 -17,7l0 0c1,-3 3,-7 4,-11l0 0z" />
+    <path fill="white" d="M0 44l0 0c0,4 1,8 2,12l0 0c0,0 0,0 0,1l0 0c0,0 0,0 0,0l0 0c5,18 22,31 42,31 9,0 17,-3 24,-8l0 0c0,0 0,0 1,0l0 0c0,0 0,-1 1,-1l0 0c8,-6 14,-15 16,-25l0 0c0,0 1,0 1,-1l0 0c0,0 0,0 0,0l0 0c0,-3 1,-6 1,-9l0 0c0,-6 -2,-12 -4,-17l0 0c0,-1 -1,-2 -3,-1l0 0c-1,0 -1,1 -1,2l0 0c2,5 4,10 4,16l0 0c0,3 -1,6 -2,9l0 0c0,2 -1,4 -3,6l0 0c0,-1 0,-2 0,-2l0 0c0,-8 -2,-17 -6,-24l0 0c3,-3 5,-6 6,-9l0 0c0,-1 -1,-3 -2,-3l0 0c-1,0 -2,1 -2,2l0 0c-1,2 -2,4 -4,6l0 0c0,-1 -1,-2 -2,-3l0 0c-3,-5 -8,-10 -12,-13l0 0c6,0 12,2 16,4l0 0c1,1 2,1 3,0l0 0c0,-1 0,-2 0,-3l0 0c-7,-9 -18,-14 -32,-14l0 0c-24,0 -44,20 -44,44zm45 -38c-2,-1 -4,-1 -6,-2l0 0c2,0 3,0 5,0l0 0c0,0 1,1 2,3l0 0c0,-1 -1,-1 -1,-1zm4 -2c2,1 4,1 5,1l0 0c-1,1 -2,2 -3,3l0 0c-1,-2 -1,-3 -2,-4zm7 5c2,-1 3,-2 4,-2l0 0c2,1 4,2 6,3l0 0c-3,-1 -7,-1 -10,-1zm-33 5c1,-2 2,-4 4,-5l0 0c4,-2 10,-2 16,1l0 0c-3,0 -5,1 -7,1l0 0c-5,2 -9,3 -13,6l0 0c0,-1 0,-2 0,-3zm-4 -1c0,0 0,0 0,0l0 0c0,2 0,4 0,6l0 0c-4,3 -8,7 -11,11l0 0c-1,1 -2,2 -3,3l0 0c3,-8 8,-15 14,-20zm9 13c-2,-2 -3,-4 -4,-5l0 0c4,-3 8,-4 13,-6l0 0c2,-1 5,-1 8,-2l0 0c-4,5 -8,10 -12,17l0 0c-2,-2 -3,-3 -5,-4zm17 8c-3,-1 -5,-1 -8,-3l0 0c4,-6 8,-12 12,-16l0 0c1,5 2,12 3,20l0 0c-2,0 -4,0 -7,-1zm8 -19c5,4 9,8 13,14l0 0c1,1 1,2 2,3l0 0c-3,1 -8,3 -12,3l0 0c0,-7 -1,-14 -3,-20zm-40 38c-4,-3 -6,-6 -7,-10l0 0c1,-3 2,-7 5,-11l0 0c3,-3 6,-6 10,-9l0 0c1,2 2,4 4,6l0 0c2,1 4,3 6,4l0 0c0,1 -1,3 -1,4l0 0c-4,7 -7,15 -9,22l0 0c-3,-1 -6,-3 -8,-6zm26 13c-5,-1 -10,-3 -14,-5l0 0c1,-6 4,-14 8,-22l0 0c1,-2 1,-3 2,-4l0 0c3,1 6,2 10,3l0 0c2,1 5,1 7,1l0 0c0,2 0,3 0,5l0 0c0,9 -1,17 -2,24l0 0c-3,-1 -7,-1 -11,-2zm17 -22c0,-2 0,-3 0,-5l0 0c5,0 10,-2 14,-4l0 0c3,7 5,15 5,22l0 0c0,2 0,4 0,5l0 0c-2,1 -4,2 -7,3l0 0c-4,2 -9,2 -14,3l0 0c2,-8 2,-16 2,-24zm-50 11c-1,-2 -1,-3 -1,-4l0 0c1,2 3,3 5,5l0 0c3,3 6,5 10,8l0 0c0,4 -1,8 0,11l0 0c-7,-5 -12,-12 -14,-20zm21 25c-1,0 -1,-1 -1,-1l0 0c-2,-1 -3,-6 -2,-14l0 0c5,2 9,4 14,5l0 0c4,1 8,1 11,2l0 0c-1,7 -4,11 -5,11l0 0c0,0 0,1 0,1l0 0c-7,-1 -12,-2 -17,-4zm27 -8c5,0 11,-1 16,-3l0 0c1,0 2,-1 3,-1l0 0c-1,3 -3,6 -6,8l0 0c-5,4 -11,6 -17,7l0 0c1,-3 3,-7 4,-11l0 0z" />
+        </g>
+    </svg>
+</script>
+
+<script type="text/html" id="composingReportControllerTemplate">
+    <div>Composing the report, please wait</div>
+</script>
+<script type="text/html" id="availableReportControllerTemplate">
+    <button class="report-generate-action" href="#" data-bind="click: generate">Generate PDF report</button>
+</script>
+<script type="text/html" id="workingReportControllerTemplate">
+    <div>Generating the report, please wait</div>
+</script>
+<script type="text/html" id="finishedReportControllerTemplate">
+    <a data-bind="attr: { href: goBackUrl }">Back to <span data-bind="text: country.name"></span></a>
+    &nbsp;&nbsp;or&nbsp;&nbsp;
+    <button class="report-generate-action" href="#" data-bind="click: generate">Generate PDF report again</button>
+</script>

@@ -1,0 +1,50 @@
+﻿@import 'variables';
+
+.report-page.as-toc {
+    position: relative;
+
+    .report-toc-backdrop {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        width: 300px;
+        background-color: @report-background-color;
+    }
+
+    .report-toc-title {
+        position: absolute;
+        top: 100px;
+        right: 100px;
+        font-size: 40px;
+        width: 200px;
+        text-align: right;
+        color: @report-header-color;
+    }
+
+    .report-toc-content {
+        position: absolute;
+        bottom: 60px;
+        left: 80px;
+    }
+
+    .report-toc-body-name, .report-toc-body-page, .report-toc-body-description {
+        vertical-align: top;
+        padding-bottom: 10px;
+    }
+
+    .report-toc-body-name {
+        width: 200px;
+    }
+
+    .report-toc-body-page {
+        font-weight: bold;
+        width: 50px;
+        text-align: right;
+    }
+
+    .report-toc-body-description {
+        padding-left: 20px;
+        width: 600px;
+    }
+}

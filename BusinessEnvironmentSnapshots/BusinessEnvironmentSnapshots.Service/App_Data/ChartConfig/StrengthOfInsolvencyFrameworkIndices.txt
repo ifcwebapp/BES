@@ -1,0 +1,8 @@
+﻿Years=MostRecent
+RegionData=AVGd
+IncomeData=AVG
+[Indicators]
+IndicatorName=Resolving Insolvency: Commencement of proceedings index (0-3)
+IndicatorName=Resolving Insolvency: Management of debtor's assets index (0-6)
+IndicatorName=Resolving Insolvency: Reorganization proceedings index (0-3)
+IndicatorName=Resolving Insolvency: Creditor participation index (0-4)

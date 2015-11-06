@@ -1,0 +1,5 @@
+﻿Years=MostRecent
+RegionData=AVGd
+IncomeData=AVG
+[Indicators]
+IndicatorName=Electric power consumption (kWh per capita)

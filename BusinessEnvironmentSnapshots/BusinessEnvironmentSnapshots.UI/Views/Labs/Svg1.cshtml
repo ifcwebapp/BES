@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Svg";
+    Layout = "~/Views/Shared/_ScriptsLayout.cshtml";
+}
+
+@section head {
+    <link href="@Url.Content("~/libs/normalize-css/normalize.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/styles/root.css")" rel="stylesheet" type="text/css" />
+}
+
+@section scripts {
+    <script type="text/javascript"
+            src="@Url.Content("~/libs/requirejs/require.js")"
+            data-main="@Url.Content("~/Scripts/app/labs/root-svg.js")">
+    </script>
+}
+
+
+
+<div class="report-page-container" data-bind="click: generate">
+    <div class="report-page">
+        <svg width="540" height="250">
+            <g transform="translate(70,15)">
+                <g class="chart-axis as-y" style="shape-rendering: crispEdges;">
+                    <g class="tick" transform="translate(0,164)" style="opacity: 1;">
+                        <line x2="-4" y2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line>
+                        <text dy=".32em" x="-7" y="-6" vertical-text-anchor="middle" max-length="60" style="text-anchor: end; font-size: 10px;"><tspan x="-7">Strength</tspan><tspan dx="2.59766">of</tspan><tspan dx="0" x="-7" dy="12">laws</tspan><tspan dx="2.59766">index</tspan></text>
+                    </g>
+                    <g class="tick" transform="translate(0,100)" style="opacity: 1;"><line x2="-4" y2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".32em" x="-7" y="-12" vertical-text-anchor="middle" max-length="60" style="text-anchor: end; font-size: 10px;"><tspan x="-7">Ease</tspan><tspan dx="2.59766">of</tspan><tspan dx="0" x="-7" dy="12">process</tspan><tspan dx="0" x="-7" dy="12">index</tspan></text></g>
+                    <g class="tick" transform="translate(0,36)" style="opacity: 1;">
+                        <line x2="-4" y2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line>
+                        <text dy=".32em" x="-7" y="-18" vertical-text-anchor="middle" max-length="60" style="text-anchor: end; font-size: 10px;"><tspan x="-7">Extent</tspan><tspan dx="2.59766">of</tspan><tspan dx="0" x="-7" dy="12">judicial</tspan><tspan dx="0" x="-7" dy="12">assistance</tspan><tspan dx="0" x="-7" dy="12">index</tspan></text>
+                    </g>
+                    <path class="domain" d="M-4,0H0V200H-4" style="fill: none; stroke: rgb(119, 119, 119);"></path>
+                </g>
+                <g class="chart-axis as-x" transform="translate(0,200)" style="shape-rendering: crispEdges;">
+                    <g transform="translate(460, 25)"><text style="font-size: 10px; text-anchor: end;">Index score (100 = max)</text></g>
+                    <g class="tick" transform="translate(0,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">0</tspan></text></g>
+                    <g class="tick" transform="translate(46,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">10</tspan></text></g>
+                    <g class="tick" transform="translate(92,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">20</tspan></text></g>
+                    <g class="tick" transform="translate(138,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">30</tspan></text></g>
+                    <g class="tick" transform="translate(184,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">40</tspan></text></g>
+                    <g class="tick" transform="translate(230,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">50</tspan></text></g>
+                    <g class="tick" transform="translate(276,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">60</tspan></text></g>
+                    <g class="tick" transform="translate(322,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">70</tspan></text></g>
+                    <g class="tick" transform="translate(368,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">80</tspan></text></g>
+                    <g class="tick" transform="translate(414,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">90</tspan></text></g>
+                    <g class="tick" transform="translate(460,0)" style="opacity: 1;"><line y2="4" x2="0" style="fill: none; stroke: rgb(119, 119, 119);"></line><text dy=".71em" y="7" x="0" vertical-text-anchor="start" max-length="460" style="text-anchor: middle; font-size: 10px;"><tspan x="0">100</tspan></text></g>
+                    <path class="domain" d="M0,4V0H460V4" style="fill: none; stroke: rgb(119, 119, 119);"></path>
+                </g>
+                <g class="chart-group" transform="translate(0, 135)"><g><rect class="chart-bar" y="0" height="29" x="0" width="360.17999999999995" fill="#032F54"></rect><rect class="chart-bar" y="29" height="29" x="0" width="381.34000000000003" fill="#03ADEC"></rect></g></g>
+                <g class="chart-group" transform="translate(0, 71)"><g><rect class="chart-bar" y="0" height="29" x="0" width="363.40000000000003" fill="#032F54"></rect><rect class="chart-bar" y="29" height="29" x="0" width="319.24" fill="#03ADEC"></rect></g></g>
+                <g class="chart-group" transform="translate(0, 7)"><g><rect class="chart-bar" y="0" height="29" x="0" width="390.54" fill="#032F54" style="z-index: 1;"></rect><rect class="chart-bar" y="29" height="29" x="0" width="293.94" fill="#03ADEC" style="z-index: 0;"></rect></g></g>
+            </g>
+        </svg>
+    </div>
+</div>
+@{ Html.RenderPartial("~/views/app/ReportTemplates.cshtml"); }
+@{ Html.RenderPartial("~/views/app/Statistics.cshtml"); }

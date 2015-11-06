@@ -1,0 +1,45 @@
+﻿@model RootChart
+@{
+    ViewBag.PageCssQualifier = "as-chart";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+@section scripts {
+    @{
+        var baseHostAndPortUri = new Uri(HttpContext.Current.Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped));
+        var basePath = Url.Content("~");
+    }
+    <script type="text/javascript">
+
+        var require = require || {};
+        require.config = require.config || {};
+        require.config['models/externals'] = {
+            baseApiUrl: '@basePath',
+            chartId: '@this.Model.ChartId',
+            countryCode: '@this.Model.CountryCode'
+        };
+
+    </script>
+    <script type="text/javascript"
+            src="@Url.Content("~/libs/requirejs/require.js")"
+            data-main="@Url.Content("~/Scripts/app/models/charting/root.js")">
+    </script>
+}
+
+@{ Html.RenderPartial("~/views/app/charts.cshtml"); }
+@{ Html.RenderPartial("~/views/app/Globals.cshtml"); }
+
+<div class="block as-chart">
+    <div class="block-content">
+        <!-- ko variant: {
+            data: chart,
+            names: {
+                'coming': 'unloadedChartTemplate',
+                'failed': 'failedTemplate',
+                'empty': 'emptyChartTemplate',
+                'available': 'chartTemplate'
+            }
+        } -->
+        <!-- /ko -->
+    </div>
+</div>

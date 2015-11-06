@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+@section head {
+    @RenderSection("head", false)
+}
+@section scripts {
+    <script type="text/javascript">
+        var basePath = '@Url.Content("~/scripts/app/")';
+        var libsPath = '@Url.Content("~/libs/")';
+        var patchesPath = '@Url.Content("~/scripts/patches/")';
+        var otherLibsPath = '@Url.Content("~/scripts/libs/")';
+        var require = {
+            baseUrl: basePath,
+            config: {
+            },
+            paths: {
+                'text': libsPath + 'requirejs-text/text',
+                'knockout': libsPath + 'knockout/dist/knockout.debug',
+                'd3-original': libsPath + 'd3/d3',
+                'd3-patched': patchesPath + 'd3-monkey-patch',
+                'jquery': libsPath + 'jquery/dist/jquery',
+                'q': libsPath + 'q/q',
+                'html2canvas': otherLibsPath + 'html2canvas',
+                'html2canvas-svg': otherLibsPath + 'html2canvas.svg',
+                'canvg': otherLibsPath + 'canvg',
+                'rgbcolor': otherLibsPath + 'rgbcolor',
+                'stack-blur': otherLibsPath + 'StackBlur',
+                'pdf-kit': otherLibsPath + 'pdfkit',
+                'blob-stream': otherLibsPath + 'blob-stream'
+            },
+            map: {
+                '*': {
+                    'd3': 'd3-patched'
+                }
+            },
+            shim: {
+                'html2canvas-svg': {
+                    'deps': ['canvg', 'rgbcolor', 'stack-blur', 'html2canvas'],
+                    'exports': 'html2canvas'
+                } 
+            },
+            packages: [
+                {
+                    name: 'static',
+                    location: '../static'
+                }
+            ]
+        };
+
+    </script>
+    @RenderSection("scripts", false)
+}
+@RenderBody()

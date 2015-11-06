@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_StylesLayout.cshtml";
+}
+
+@section scripts {
+    @RenderSection("scripts")
+}
+
+<div class="page @ViewBag.PageCssQualifier">
+
+    <div class="block">
+        <div class="block-content">
+
+            <div class="header">
+                <div class="header-logo">
+                    <a href="http://www.worldbank.org/">
+                        <img src="@Url.Content("~/styles/world-bank-group.png")" />
+                    </a>
+                </div>
+                <div class="header-menu" data-bind="
+                    foreach: [
+                        { name: 'HOME'                     , url: 'http://www.worldbank.org/' },
+                        { name: 'ABOUT'                    , url: 'http://www.worldbank.org/en/about' },
+                        { name: 'DATA'                     , url: 'http://data.worldbank.org/' },
+                        { name: 'RESEARCH'                 , url: 'http://www.worldbank.org/en/research' },
+                        { name: 'LEARNING'                 , url: 'http://einstitute.worldbank.org/ei/' },
+                        { name: 'NEWS'                     , url: 'http://www.worldbank.org/en/news' },
+                        { name: 'PROJECTS &amp; OPERATIONS', url: 'http://www.worldbank.org/projects' },
+                        { name: 'PUBLICATIONS'             , url: 'http://www.worldbank.org/reference/' },
+                        { name: 'COUNTRIES'                , url: 'http://www.worldbank.org/en/country' },
+                        { name: 'TOPICS'                   , url: 'http://www.worldbank.org/en/topic' }
+                    ]">
+                    <div class="header-menu-item" data-bind="css: { 'as-active': name === 'DATA' }">
+                        <a class="header-menu-item-link" href="#" data-bind="attr: { href: url }, text: name"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+    <div class="block">
+        <div class="block-content">
+
+            <div class="footer">
+                <div class="wbg-partners">
+                    <div class="footer-logo left">
+                        <img src="@Url.Content("~/styles/world-bank-group.png")" title="The World Bank Working for a World Free of Poverty" />
+                    </div>
+                    <div class="worldbank-partner left">
+                        <a title="International Bank for Reconstruction and Development" href="http://www.worldbank.org/ibrd">
+                            IBRD
+                        </a> <a title="International Development Association" href="http://www.worldbank.org/ida">
+                            IDA
+                        </a> <a title="International Finance Corporation" href="http://www.ifc.org/">IFC</a>
+                        <a title="Multilateral Investment Guarantee Agency" href="http://www.miga.org/">MIGA</a>
+                        <a title="International Centre for Settlement of Investment Disputes" href="http://icsid.worldbank.org/">
+                            ICSID
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div>
+                    <div class="wbg-misc-links left">
+                        <div class="links">
+                            <a href="http://www.worldbank.org/legalinfo">Legal</a> <span> | </span> <a href="http://go.worldbank.org/TRCDVYJ440">
+                                Access to Information
+                            </a> <span> | </span> <a href="http://www.worldbank.org/jobs">Jobs</a> <span> | </span> <a href="http://www.worldbank.org/sitemap">Site Map</a> <span> | </span> <a href="http://www.worldbank.org/contacts">
+                                Contact
+                            </a>
+                        </div>
+                        <div class="copyright">
+                            ©@DateTime.Now.Year The World Bank Group, All Rights Reserved.
+                        </div>
+                    </div>
+                    <div class="hotlineNumber right">
+                        <div>
+                            <a href="http://web.worldbank.org/WBSITE/EXTERNAL/EXTABOUTUS/ORGANIZATION/ORGUNITS/EXTDOII/0,,contentMDK:20659616~menuPK:1702202~pagePK:64168445~piPK:64168309~theSitePK:588921,00.html">
+                                FRAUD &amp; CORRUPTION HOTLINE
+                            </a>
+                        </div>
+                        <div class="hotlineNumberPhone right">
+                            <span>1-202-458-7677</span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ko with: lightbox -->
+<div class="lightbox-backdrop" data-bind="click: function(_, e) { $root.lightbox(null); }"></div>
+<div class="lightbox" data-bind="
+    style: (function() {
+        var box = targetElement.getBoundingClientRect();
+        var x = box.right + (document.documentElement.scrollLeft || document.body.scrollLeft || 0);
+        var y = box.top + (document.documentElement.scrollTop || document.body.scrollTop || 0);
+        return {
+            left: x + 'px',
+            top: y + 'px'
+        };
+    })(),
+    variant: {
+        data: data,
+        names: { 'statistics-source': 'statisticsSourceTemplate' }
+    }
+">
+</div>
+<!-- /ko -->
+
+<script type="text/html" id="navigation">
+
+</script>

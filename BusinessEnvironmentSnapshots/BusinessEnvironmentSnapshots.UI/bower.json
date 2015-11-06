@@ -1,0 +1,31 @@
+{
+  "name": "business-environment-snapshots",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ifcwebapp/business-environment-snapshots",
+  "authors": [
+    "Aleksey Bykov",
+    "Maxim Rusaev"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "knockout": "~3.3.0",
+    "d3": "~3.5.5",
+    "requirejs": "~2.1.16",
+    "normalize-css": "~3.0.2",
+    "q": "~1.0.1",
+    "jasmine": "~2.2.1",
+    "requirejs-text": "~2.0.14"
+  }
+}

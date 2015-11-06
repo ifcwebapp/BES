@@ -1,0 +1,16 @@
+Years=MostRecent
+RegionData=AVGd
+IncomeData=AVG
+[Indicators]
+IndicatorName=Control of Corruption
+IndicatorName=Rule of Law
+IndicatorName=Regulatory Quality
+IndicatorName=Government Effectiveness
+IndicatorName=Political Stability and Absence of Violence and Terrorism
+IndicatorName=Voice and Accountability
+IndicatorName=Control of Corruption: StdErr
+IndicatorName=Rule of Law: StdErr
+IndicatorName=Regulatory Quality: StdErr
+IndicatorName=Government Effectiveness: StdErr
+IndicatorName=Political Stability and Absence of Violence and Terrorism: StdErr
+IndicatorName=Voice and Accountability: StdErr

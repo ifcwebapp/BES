@@ -1,0 +1,12 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Mining, oil and gas
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Agriculture and forestry
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Light manufacturing
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Telecommunications
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Electricity
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Banking
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Insurance
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Transportation
+IndicatorName=Foreign equity ownership indexes (100 = full foreign ownership allowed): Media

@@ -1,0 +1,138 @@
+﻿@import 'variabless';
+
+.mix-reset-text {
+    &, &:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.mix-stretched() {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.mix-tab-line() {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    background-color: #112049;
+}
+
+.mix-rounded(@radius) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.mix-shadow(@x-axis: 0, @y-axis: 1px, @blur: 2px, @alpha: 0.1) {
+    -webkit-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+    -moz-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+    box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+}
+
+
+.mix-gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
+    background: @color;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, @start), color-stop(1, @stop));
+    background: -ms-linear-gradient(bottom, @start, @stop);
+    background: -moz-linear-gradient(center bottom, @start 0%, @stop 100%);
+    background: -o-linear-gradient(@stop, @start);
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
+}
+
+.mix-clearfix() {
+    &:before, &:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    & {
+        *zoom: 1;
+    }
+}
+
+.mix-tip(left-top, @top, @size, @border-size, @border-color, @background-color) {
+
+    &:before {
+        content: '';
+        position: absolute;
+        right: 100%;
+        border: solid @size transparent;
+        border-right-color: @border-color;
+        margin-left: @border-size;
+        margin-top: -@size;
+        top: @top;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        right: 100%;
+        top: @top;
+        border: solid (@size - @border-size) transparent;
+        border-right-color: @background-color;
+        margin-top: -@size + @border-size;
+    }
+}
+
+.mix-tip(top, @size, @border-size, @border-color, @background-color) {
+
+    &:before {
+        bottom: 100%;
+        margin-top: @border-size; // left -> top
+        border: solid @size transparent;
+        border-bottom-color: @border-color;
+        content: '';
+        position: absolute;
+        left: 50%;
+        margin-left: -@size;
+    }
+
+    &:after {
+        bottom: 100%; // right -> bottom
+        border: solid (@size - @border-size) transparent;
+        border-bottom-color: @background-color;
+        content: '';
+        position: absolute;
+        left: 50%;
+        margin-left: -@size + @border-size;
+    }
+}
+
+.mix-tip(bottom, @size, @border-size, @border-color, @background-color, @right) {
+
+    &:before {
+        top: 100%;
+        margin-bottom: @border-size;
+        border: solid @size transparent;
+        border-top-color: @border-color;
+        content: '';
+        position: absolute;
+        right: @right;
+        margin-right: @size;
+    }
+
+    &:after {
+        top: 100%;
+        border: solid (@size - @border-size) transparent;
+        border-top-color: @background-color;
+        content: '';
+        position: absolute;
+        right: @right;
+        margin-right: @size + @border-size;
+    }
+}
+
+
+.mix-inner() {
+    margin: 0px 10px 10px 0px;
+}

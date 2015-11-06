@@ -1,0 +1,114 @@
+﻿@import 'report/variables';
+@import 'report/statistics';
+@import 'report/controller';
+@import 'report/title';
+@import 'report/toc';
+@import 'mixins';
+
+.report {
+    .mix-clearfix();
+}
+
+.report {
+    .chart-label {
+        display: none;
+    }
+}
+
+.report-page-container {
+    margin-top: 40px;
+    margin-left: 40px;
+    float: left;
+    border: solid 1px #aaa;
+    box-shadow: rgba(0, 0, 0, 0.1) 10px 10px;
+}
+
+.report-page {
+    position: relative;
+    width: @report-page-width;
+    height: @report-page-height;
+}
+
+.report-page.as-being-shrunken {
+    border: solid 5px black;
+}
+
+.report-page {
+    overflow-y: hidden; // AB: THERE MUST NOT BE A SCROLLER in order to do composing accurately !!!
+    overflow-x: hidden; // AB: THERE MUST NOT BE A SCROLLER in order to do composing accurately !!!
+    .chart-container + .chart-container {
+        padding-top: 60px;
+    }
+
+    .report-block-section-container + .chart-container {
+        padding-top: 50px;
+    }
+
+    .chart-container {
+        margin: 0px;
+        padding: 100px 60px 0px 60px;
+    }
+
+    .chart-description {
+        font-size: inherit;
+    }
+
+    .chart-graph {
+        width: 480px;
+    }
+
+    .chart-tools {
+        display: none;
+    }
+
+    .report-block-section-container {
+        position: relative;
+        background-color: @report-background-color;
+        height: 260px;
+    }
+
+    .report-block-section {
+        position: absolute;
+        bottom: 50px;
+        left: 60px;
+        right: 60px;
+    }
+
+    .report-block-section-name {
+        line-height: 80px;
+        font-size: @report-header-font-size;
+        color: @report-header-color;
+    }
+
+    .report-block-section-description {
+    }
+
+    .report-page-footer {
+        position: absolute;
+        bottom: 20px;
+        color: #777;
+        right: 20px;
+    }
+}
+
+.page-number-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    white-space: nowrap;
+    font-weight: bold;
+
+    .page-number {
+        position: absolute;
+        text-align: right;
+        right: 100%;
+        top: 0px;
+        color: #777;
+        margin-right: 5px;
+    }
+
+    .page-number-highlighted {
+        color: #75100C;
+        text-align: left;
+    }
+}

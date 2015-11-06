@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Svg";
+    Layout = "~/Views/Shared/_ScriptsLayout.cshtml";
+}
+
+@section head {
+    <link href="@Url.Content("~/libs/normalize-css/normalize.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/styles/root.css")" rel="stylesheet" type="text/css" />
+}
+
+@section scripts {
+    <script type="text/javascript"
+        src="@Url.Content("~/libs/requirejs/require.js")"
+        data-main="@Url.Content("~/Scripts/app/labs/root-wrap.js")">
+    </script>
+}
+<div style="padding: 30px">
+    <div>
+        <input type="range" data-bind="value: width" />
+    </div>
+    <div style="margin-top: 20px;">
+        <select data-bind="
+            options: [
+                { anchor: 'start', x: 0 },
+                { anchor: 'middle', x: 50 },
+                { anchor: 'end', x: 100 }
+            ],
+            optionsText: 'anchor',
+            value: alignment
+        ">
+        </select>
+    </div>
+    <div style="margin-top: 20px;">
+        <input type="text" data-bind="value: value, valueUpdate: 'afterkeydown'" />
+    </div>
+    <div style="margin-top:20px;">
+        <svg height="100" width="200">
+            <rect data-bind="attr: { width: width }" fill="#ddd" height="100" />
+            <text data-bind="text: value, attr: { 'text-anchor': alignment().anchor, x: alignment().x }" y="20">Hi ninia</text>
+        </svg>
+    </div>
+</div>

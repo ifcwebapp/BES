@@ -1,0 +1,5 @@
+﻿Years=LastRecent-MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Ease of Doing Business: DTF
+IndicatorName=Ease of Doing Business: Rank

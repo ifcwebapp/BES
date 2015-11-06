@@ -1,0 +1,25 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Ease of Doing Business: DTF
+IndicatorName=Starting a Business: DTF
+IndicatorName=Dealing with Construction Permits: DTF
+IndicatorName=Getting Electricity: DTF
+IndicatorName=Registering Property: DTF
+IndicatorName=Getting Credit: DTF
+IndicatorName=Protecting Minority Investors: DTF
+IndicatorName=Paying Taxes: DTF
+IndicatorName=Trading Across Borders: DTF
+IndicatorName=Enforcing Contracts: DTF
+IndicatorName=Resolving Insolvency: DTF
+IndicatorName=Ease of Doing Business: Rank
+IndicatorName=Starting a Business: Rank
+IndicatorName=Dealing with Construction Permits: Rank
+IndicatorName=Getting Electricity: Rank
+IndicatorName=Registering Property: Rank
+IndicatorName=Getting Credit: Rank
+IndicatorName=Protecting Minority Investors: Rank
+IndicatorName=Paying Taxes: Rank
+IndicatorName=Trading Across Borders: Rank
+IndicatorName=Enforcing Contracts: Rank
+IndicatorName=Resolving Insolvency: Rank

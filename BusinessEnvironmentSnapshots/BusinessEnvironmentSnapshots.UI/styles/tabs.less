@@ -1,0 +1,42 @@
+﻿@import 'mixins';
+
+.tabs {
+    position: relative;
+    margin-top: 35px;
+    .mix-clearfix();
+}
+
+.tab {
+    position: relative;
+    display: block;
+    width: 150px;
+    border: solid 1px @border-color;
+    top: 1px;
+    height: 60px;
+    float: left;
+    background-color: white;
+    text-decoration: none;
+}
+
+.tab-text {
+    display: block;
+    padding: 10px 15px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.tab + .tab {
+    border-left: none;
+}
+
+.tab.as-active {
+    &::after {
+        .mix-tab-line();
+        top: -1px;
+        height: 3px;
+    }
+
+    background-color: @tab-background-color;
+    .mix-reset-text();
+    border-bottom-color: @tab-background-color;
+}

@@ -1,0 +1,6 @@
+﻿Years=MostRecent
+RegionData=AVGd
+IncomeData=AVG
+[Indicators]
+IndicatorName=Getting Credit: Strength of legal rights index (0-12)
+IndicatorName=Getting Credit: Depth of credit information index (0-8)

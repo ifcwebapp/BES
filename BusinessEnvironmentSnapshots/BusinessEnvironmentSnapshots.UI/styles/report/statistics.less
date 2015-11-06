@@ -1,0 +1,54 @@
+﻿@import 'variables';
+
+.report-page.as-statistics {
+    position: relative;
+
+    .report-statistics-backdrop {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+    }
+
+    .report-statistics {
+        position: absolute;
+        background-color: @report-background-color;
+        top: 677px;
+        padding: 60px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .report-statistics-header {
+        font-size: @report-header-font-size;
+        color: @report-header-color;
+    }
+
+    .report-statistics-header-highlight {
+        color: #75100C;
+        font-style: italic;
+
+        .report-statistics-header-highlight {
+            font-style: initial;
+            font-weight: bold;
+        }
+    }
+
+    .report-statistics-data {
+        margin-top: 50px;
+
+        .statistics-part {
+            margin-bottom: 30px;
+        }
+
+        .statistics-region-name, .statistics-country-year {
+            font-weight: normal;
+        }
+
+        .statistics-source {
+            display: none;
+        }
+    }
+}

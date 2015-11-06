@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Business Environment Snapshots @ViewBag.Title</title>
+    @* AB: protocol is deliberately omitted since we want to account for both http and https kinds of deployment. *@
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css">
+    @RenderSection("head", false)
+    @RenderSection("scripts")
+</head>
+<body>
+    <canvas id="cvs" width="960" height="500" style="display: none;"></canvas>
+    @RenderBody()
+</body>
+</html>

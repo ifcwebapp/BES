@@ -1,0 +1,7 @@
+Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Exports of goods and services (% of GDP)
+IndicatorName=Imports of goods and services (% of GDP)
+IndicatorName=Exports of goods and services (current US$)
+IndicatorName=Imports of goods and services (current US$)

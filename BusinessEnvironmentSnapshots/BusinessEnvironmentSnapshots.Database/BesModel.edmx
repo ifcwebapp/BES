@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankProject">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="CountryCode" Type="varchar" MaxLength="50" />
+          <Property Name="ProjectId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="250" />
+          <Property Name="ApprovalDate" Type="datetime" />
+          <Property Name="Amount" Type="decimal" Precision="28" Scale="5" />
+          <Property Name="ProjectType" Type="varchar" MaxLength="50" />
+          <Property Name="ProjectLink" Type="varchar" MaxLength="550" />
+          <Property Name="ProjectStatus" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="IncomeId" Type="int" />
+          <Property Name="LowIncomeRegionId" Type="int" />
+          <Property Name="EconomicalRegionId" Type="int" />
+          <Property Name="CountryAlias" Type="varchar" MaxLength="150" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatisticsSource">
+          <Key>
+            <PropertyRef Name="IndicatorId" />
+          </Key>
+          <Property Name="IndicatorId" Type="int" Nullable="false" />
+          <Property Name="SourceName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="SourceLink" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <Function Name="GetAllTabs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetChartInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chartId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetCountriesInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="countryCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetCountryInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="countryCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetDocuments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="countryCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetIndicatorsInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetIndicatorsValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetOtherResources" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="countryCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="BESModelStoreContainer">
+          <EntitySet Name="BankProject" EntityType="Self.BankProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatisticsSource" EntityType="Self.StatisticsSource" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BesEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetValuesForCountry">
+            <Parameter Name="startYear" Mode="In" Type="Int32" />
+            <Parameter Name="endYear" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetChartInfo" ReturnType="Collection(BESModel.GetChartInfo_Result)">
+          <Parameter Name="chartId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetIndicatorsValues" />
+          <FunctionImport Name="GetCountryInfo" ReturnType="Collection(BESModel.GetCountryInfo_Result)">
+          <Parameter Name="countryCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCountriesInfo" ReturnType="Collection(BESModel.GetCountriesInfo_Result)">
+          <Parameter Name="countryCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetValues" />
+          <FunctionImport Name="GetIndicatorsInfo" ReturnType="Collection(BESModel.GetIndicatorsInfo_Result)">
+          </FunctionImport>
+          <FunctionImport Name="GetAllTabs" ReturnType="Collection(BESModel.GetAllTabs_Result)" />
+          <EntitySet Name="Countries" EntityType="BESModel.Country" />
+          <EntitySet Name="BankProjects" EntityType="BESModel.BankProject" />
+          <FunctionImport Name="GetDocuments" ReturnType="Collection(BESModel.GetDocuments_Result)">
+          <Parameter Name="countryCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetOtherResources" ReturnType="Collection(BESModel.GetOtherResources_Result)">
+          <Parameter Name="countryCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="StatisticsSources" EntityType="BESModel.StatisticsSource" />
+        </EntityContainer>
+        <ComplexType Name="GetValuesForCountry_Result">
+          </ComplexType>
+        <ComplexType Name="GetChartInfo_Result">
+          <Property Type="String" Name="ChartId" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="ChartTitle" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="ChartDescription" Nullable="true" MaxLength="8000" />
+          <Property Type="String" Name="ChartSourceTitle" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ChartSourceLink" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ChartYaxisTitle" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ChartValueSuffix" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="SectionId" Nullable="false" />
+          <Property Type="String" Name="ChartTitleYearSuffix" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="ChartOrderId" Nullable="true" />
+          <Property Type="Decimal" Name="ChartYaxisMin" Nullable="true" Precision="18" Scale="1" />
+          <Property Type="Decimal" Name="ChartYaxisMax" Nullable="true" Precision="18" Scale="1" />
+          <Property Type="String" Name="ChartNote" Nullable="true" MaxLength="1050" />
+          <Property Type="String" Name="TableUnitLabel" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TableIndicatorColumn" Nullable="true" MaxLength="150" />
+          </ComplexType>
+        <ComplexType Name="GetCountryInfo_Result">
+          <Property Type="Int32" Name="CountryId" Nullable="false" />
+          <Property Type="String" Name="CountryCode" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="CountryName" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="RegionId" Nullable="true" />
+          <Property Type="Int32" Name="IncomeId" Nullable="true" />
+          <Property Type="Int32" Name="LowIncomeRegionId" Nullable="true" />
+          <Property Type="Int32" Name="EconomicalRegionId" Nullable="true" />
+          <Property Type="String" Name="RegionName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AvgdRegionId" Nullable="true" />
+          <Property Type="Int32" Name="EsRegionId" Nullable="true" />
+          <Property Type="Int32" Name="ComparedCountryId" Nullable="false" />
+          <Property Type="Int32" Name="AvgRegionId" Nullable="true" />
+          <Property Type="Int32" Name="WdiRegionId" Nullable="true" />
+          <Property Type="String" Name="CountryAlias" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="GetCountriesInfo_Result">
+          <Property Type="Int32" Name="CountryId" Nullable="false" />
+          <Property Type="String" Name="CountryCode" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="CountryName" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="RegionId" Nullable="true" />
+          <Property Type="Int32" Name="IncomeId" Nullable="true" />
+          <Property Type="Int32" Name="LowIncomeRegionId" Nullable="true" />
+          <Property Type="Int32" Name="EconomicalRegionId" Nullable="true" />
+          <Property Type="String" Name="CountryAlias" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="RegionName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsEconomical" Nullable="true" />
+          <Property Type="Int32" Name="WdiRegionId" Nullable="true" />
+          <Property Type="Int32" Name="AvgRegionId" Nullable="true" />
+          <Property Type="Int32" Name="AvgdRegionId" Nullable="true" />
+          <Property Type="Int32" Name="EsRegionId" Nullable="true" />
+          <Property Type="Int32" Name="CountryType" Nullable="false" />
+          <Property Type="String" Name="IncomeName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="WdiIncomeId" Nullable="true" />
+          <Property Type="Int32" Name="AvgIncomeId" Nullable="true" />
+          <Property Type="Int32" Name="EsIncomeId" Nullable="true" />
+          <Property Type="Int32" Name="WdiWorldId" Nullable="false" />
+          <Property Type="Int32" Name="EsWorldId" Nullable="false" />
+          </ComplexType>
+        <ComplexType Name="GetIndicatorsInfo_Result">
+          <Property Type="Int32" Name="IndicatorId" Nullable="false" />
+          <Property Type="String" Name="IndicatorName" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="IndicatorSourceId" Nullable="false" />
+          <Property Type="String" Name="IndicatorAlias" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IndicatorRankIndicatorId" Nullable="true" />
+          <Property Type="Boolean" Name="IsRankIndicator" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllTabs_Result">
+          <Property Type="Int32" Name="TabId" Nullable="false" />
+          <Property Type="String" Name="TabCode" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="TabName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="SectionName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="ChartId" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="SectionId" Nullable="false" />
+          <Property Type="Int32" Name="SectionOrderId" Nullable="true" />
+          <Property Type="Int32" Name="ChartOrderId" Nullable="true" />
+          <Property Type="String" Name="SectionType" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="CountryCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="IncomeId" Type="Int32" />
+          <Property Name="LowIncomeRegionId" Type="Int32" />
+          <Property Name="EconomicalRegionId" Type="Int32" />
+          <Property Name="CountryAlias" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankProject">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="CountryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovalDate" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="28" Scale="5" />
+          <Property Name="ProjectType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectLink" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="GetDocuments_Result">
+          <Property Type="Int32" Name="DocId" Nullable="false" />
+          <Property Type="String" Name="DocName" Nullable="false" MaxLength="1024" />
+          <Property Type="String" Name="DocLink" Nullable="false" MaxLength="1024" />
+          <Property Type="Int32" Name="DocType" Nullable="false" />
+          <Property Type="String" Name="DocTypeDescription" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetOtherResources_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Link" Nullable="false" MaxLength="1024" />
+          <Property Type="Int32" Name="CountryId" Nullable="false" />
+          <Property Type="Int32" Name="OrderId" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="StatisticsSource">
+          <Key>
+            <PropertyRef Name="IndicatorId" />
+          </Key>
+          <Property Name="IndicatorId" Type="Int32" Nullable="false" />
+          <Property Name="SourceName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SourceLink" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BESModelStoreContainer" CdmEntityContainer="BesEntities" >
+          <FunctionImportMapping FunctionImportName="GetChartInfo" FunctionName="BESModel.Store.GetChartInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BESModel.GetChartInfo_Result">
+                <ScalarProperty Name="ChartId" ColumnName="ChartId" />
+                <ScalarProperty Name="ChartTitle" ColumnName="ChartTitle" />
+                <ScalarProperty Name="ChartDescription" ColumnName="ChartDescription" />
+                <ScalarProperty Name="ChartSourceTitle" ColumnName="ChartSourceTitle" />
+                <ScalarProperty Name="ChartSourceLink" ColumnName="ChartSourceLink" />
+                <ScalarProperty Name="ChartYaxisTitle" ColumnName="ChartYaxisTitle" />
+                <ScalarProperty Name="ChartValueSuffix" ColumnName="ChartValueSuffix" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="ChartTitleYearSuffix" ColumnName="ChartTitleYearSuffix" />
+                <ScalarProperty Name="ChartOrderId" ColumnName="ChartOrderId" />
+                <ScalarProperty Name="ChartYaxisMin" ColumnName="ChartYaxisMin" />
+                <ScalarProperty Name="ChartYaxisMax" ColumnName="ChartYaxisMax" />
+                <ScalarProperty Name="ChartNote" ColumnName="ChartNote" />
+                <ScalarProperty Name="TableUnitLabel" ColumnName="TableUnitLabel" />
+                <ScalarProperty Name="TableIndicatorColumn" ColumnName="TableIndicatorColumn" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetIndicatorsValues" FunctionName="BESModel.Store.GetIndicatorsValues" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCountryInfo" FunctionName="BESModel.Store.GetCountryInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BESModel.GetCountryInfo_Result">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="IncomeId" ColumnName="IncomeId" />
+                <ScalarProperty Name="LowIncomeRegionId" ColumnName="LowIncomeRegionId" />
+                <ScalarProperty Name="EconomicalRegionId" ColumnName="EconomicalRegionId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="AvgdRegionId" ColumnName="AvgdRegionId" />
+                <ScalarProperty Name="EsRegionId" ColumnName="EsRegionId" />
+                <ScalarProperty Name="ComparedCountryId" ColumnName="ComparedCountryId" />
+                <ScalarProperty Name="AvgRegionId" ColumnName="AvgRegionId" />
+                <ScalarProperty Name="WdiRegionId" ColumnName="WdiRegionId" />
+                <ScalarProperty Name="CountryAlias" ColumnName="CountryAlias" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCountriesInfo" FunctionName="BESModel.Store.GetCountriesInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BESModel.GetCountriesInfo_Result">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="IncomeId" ColumnName="IncomeId" />
+                <ScalarProperty Name="LowIncomeRegionId" ColumnName="LowIncomeRegionId" />
+                <ScalarProperty Name="EconomicalRegionId" ColumnName="EconomicalRegionId" />
+                <ScalarProperty Name="CountryAlias" ColumnName="CountryAlias" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="IsEconomical" ColumnName="IsEconomical" />
+                <ScalarProperty Name="WdiRegionId" ColumnName="WdiRegionId" />
+                <ScalarProperty Name="AvgRegionId" ColumnName="AvgRegionId" />
+                <ScalarProperty Name="AvgdRegionId" ColumnName="AvgdRegionId" />
+                <ScalarProperty Name="EsRegionId" ColumnName="EsRegionId" />
+                <ScalarProperty Name="CountryType" ColumnName="CountryType" />
+                <ScalarProperty Name="IncomeName" ColumnName="IncomeName" />
+                <ScalarProperty Name="WdiIncomeId" ColumnName="WdiIncomeId" />
+                <ScalarProperty Name="AvgIncomeId" ColumnName="AvgIncomeId" />
+                <ScalarProperty Name="EsIncomeId" ColumnName="EsIncomeId" />
+                <ScalarProperty Name="WdiWorldId" ColumnName="WdiWorldId" />
+                <ScalarProperty Name="EsWorldId" ColumnName="EsWorldId" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetValues" FunctionName="BESModel.Store.GetValues" />
+          <FunctionImportMapping FunctionImportName="GetIndicatorsInfo" FunctionName="BESModel.Store.GetIndicatorsInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BESModel.GetIndicatorsInfo_Result">
+                <ScalarProperty Name="IndicatorId" ColumnName="IndicatorId" />
+                <ScalarProperty Name="IndicatorName" ColumnName="IndicatorName" />
+                <ScalarProperty Name="IndicatorSourceId" ColumnName="IndicatorSourceId" />
+                <ScalarProperty Name="IndicatorAlias" ColumnName="IndicatorAlias" />
+                <ScalarProperty Name="IndicatorRankIndicatorId" ColumnName="IndicatorRankIndicatorId" />
+                <ScalarProperty Name="IsRankIndicator" ColumnName="IsRankIndicator" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllTabs" FunctionName="BESModel.Store.GetAllTabs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BESModel.GetAllTabs_Result">
+                <ScalarProperty Name="TabId" ColumnName="TabId" />
+                <ScalarProperty Name="TabCode" ColumnName="TabCode" />
+                <ScalarProperty Name="TabName" ColumnName="TabName" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="ChartId" ColumnName="ChartId" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="SectionOrderId" ColumnName="SectionOrderId" />
+                <ScalarProperty Name="ChartOrderId" ColumnName="ChartOrderId" />
+                <ScalarProperty Name="SectionType" ColumnName="SectionType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="BESModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="CountryAlias" ColumnName="CountryAlias" />
+                <ScalarProperty Name="EconomicalRegionId" ColumnName="EconomicalRegionId" />
+                <ScalarProperty Name="LowIncomeRegionId" ColumnName="LowIncomeRegionId" />
+                <ScalarProperty Name="IncomeId" ColumnName="IncomeId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankProjects">
+            <EntityTypeMapping TypeName="BESModel.BankProject">
+              <MappingFragment StoreEntitySet="BankProject">
+                <ScalarProperty Name="ProjectStatus" ColumnName="ProjectStatus" />
+                <ScalarProperty Name="ProjectLink" ColumnName="ProjectLink" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetDocuments" FunctionName="BESModel.Store.GetDocuments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BESModel.GetDocuments_Result">
+                <ScalarProperty Name="DocId" ColumnName="DocId" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+                <ScalarProperty Name="DocLink" ColumnName="DocLink" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocTypeDescription" ColumnName="DocTypeDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetOtherResources" FunctionName="BESModel.Store.GetOtherResources">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BESModel.GetOtherResources_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="StatisticsSources">
+            <EntityTypeMapping TypeName="BESModel.StatisticsSource">
+              <MappingFragment StoreEntitySet="StatisticsSource">
+                <ScalarProperty Name="SourceLink" ColumnName="SourceLink" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="IndicatorId" ColumnName="IndicatorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

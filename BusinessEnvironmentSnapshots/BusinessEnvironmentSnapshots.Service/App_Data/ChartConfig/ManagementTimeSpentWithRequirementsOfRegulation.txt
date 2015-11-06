@@ -1,0 +1,5 @@
+﻿Years=1-3000
+RegionData=ES
+ParseYear=PerCountry
+[Indicators]
+IndicatorName=Regulations and taxes: Senior management time spent dealing with the requirements of government regulation (%)

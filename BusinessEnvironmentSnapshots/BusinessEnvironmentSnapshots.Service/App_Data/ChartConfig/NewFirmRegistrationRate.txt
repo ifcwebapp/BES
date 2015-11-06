@@ -1,0 +1,4 @@
+﻿Years=LastRecent-MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=New business density (per 1000 working-age population)

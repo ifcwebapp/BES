@@ -1,0 +1,13 @@
+﻿Years=PreviousFromMostRecent,MostRecent
+RegionData=ES
+WorldData=ES
+[Indicators]
+IndicatorName=Corruption: Percent of firms expected to give gifts in meetings with tax officials
+IndicatorName=Corruption: Percent of firms expected to give gifts to secure government contract
+IndicatorName=Corruption: Percent of firms expected to give gifts to get an operating license
+IndicatorName=Corruption: Percent of firms expected to give gifts to get an import license
+IndicatorName=Corruption: Percent of firms expected to give gifts to get a construction permit
+IndicatorName=Corruption: Percent of firms expected to give gifts to get an electrical connection
+IndicatorName=Corruption: Percent of firms expected to give gifts to get a water connection
+IndicatorName=Corruption: Percent of firms expected to give gifts to public officials "to get things done"
+IndicatorName=Corruption: Bribery incidence (percent of firms experiencing at least one bribe payment request)

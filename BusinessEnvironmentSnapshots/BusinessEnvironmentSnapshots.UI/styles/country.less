@@ -1,0 +1,29 @@
+﻿@import 'mixins.less';
+
+.country {
+    .mix-clearfix();
+}
+
+.country-flag {
+    float: left;
+}
+
+.country-name {
+    line-height: 68px;
+    select {
+        font-size: 20px;
+        line-height: 68px;
+        height: 68px;
+        padding: 0 20px;
+    }
+}
+
+.country-flag + .country-name {
+    margin-left: 10px;
+    float: left;
+}
+
+.country-name + .country-actions {
+    float: right;
+
+}

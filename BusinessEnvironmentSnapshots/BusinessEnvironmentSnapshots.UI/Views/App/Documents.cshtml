@@ -1,0 +1,29 @@
+﻿<script type="text/html" id="documentsSectionContentTemplate">
+    <div class="section-content" data-bind="with: $data.reduce(function(result, item) {
+            var group = result.groups[item.type];
+            if (!group) {
+                result.types.push(item.type);
+                group = result.groups[item.type] = [];
+            }
+            group.push(item);
+            return result;
+        }, { types: [], groups: {} })
+    ">
+        <div class="links-groups">
+            <div class="link-group" data-bind="foreach: types">
+                <div class="link-group-header" data-bind="text: $data"></div>
+                <ul class="links" data-bind="foreach: $parent.groups[$data]">
+                    <li class="link"><a data-bind="attr: { 'href': link }, text: name"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="otherResourcesSectionContentTemplate">
+    <div class="section-content">
+        <ul class="links" data-bind="foreach: $data">
+            <li class="link"><a data-bind="attr: { 'href': link }, text: name"></a></li>
+        </ul>
+    </div>
+</script>

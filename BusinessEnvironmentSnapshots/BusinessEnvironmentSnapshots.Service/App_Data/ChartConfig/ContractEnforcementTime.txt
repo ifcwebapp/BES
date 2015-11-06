@@ -1,0 +1,5 @@
+Years=2006,MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Enforcing Contracts: Time (days)
+IndicatorName=Enforcing Contracts: Rank

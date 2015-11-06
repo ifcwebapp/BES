@@ -1,0 +1,5 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Website quality
+IndicatorName=Inquiry handling

@@ -1,0 +1,146 @@
+﻿@model RootCountry
+@{
+    ViewBag.PageCssQualifier = "as-country";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+
+@section scripts {
+    @{
+        var countryCode = HttpContext.Current.Request.QueryString["countryCode"];
+        var baseHostAndPortUri = new Uri(HttpContext.Current.Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped));
+        var basePath = Url.Content("~");
+    }
+    <script type="text/javascript">
+
+        var require = require || {};
+        require.config = require.config || {};
+        require.config['models/externals'] = {
+            baseApiUrl: '@basePath',
+            countryCode: '@this.Model.CountryCode'
+        };
+
+    </script>
+    <script type="text/javascript"
+        src="@Url.Content("~/libs/requirejs/require.js")"
+        data-main="@Url.Content("~/Scripts/app/models/country/root.js")">
+    </script>
+}
+
+<div class="block as-delimiting">
+    <div class="block-content">
+
+        <div class="page-title"><a class="page-title-action" href="@Url.Content("~/")">Investment Climate Snapshot</a></div>
+
+        <div class="country">
+            <div class="country-flag">
+                <img height="68" data-bind="attr: {'src' : '@Url.Content("~/styles/country-flags/")' + country.code + '.gif'}" src="@Url.Content("~/styles/country-flags/flag.png")" />
+            </div>
+            <div class="country-name" data-bind="template: { name: 'countriesContentTemplate', data: navigation }"></div>
+            <div class="country-actions">
+                <a href="@Url.Content("~/Report/" + this.Model.CountryCode)">Generate PDF report</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="block" style="z-index: 1;">
+    <div class="block-content">
+        <div class="tabs" data-bind="foreach: tabs">
+            <a class="tab" data-bind="
+                attr: { 'href': '#tab=' + index },
+                css: { 'as-active': $parent.isTabActive($data) },
+                click: function() { $parent.activate($data); return true; }
+            ">
+                <span class="tab-text" data-bind="text: name"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ko template: {
+    name: function(tab) {
+        return {
+            'PPO': 'projectPortfolioTabContentTemplate'
+        }[tab.code] || 'tabContentTemplate';
+    },
+    data: activeTab,
+    if: activeTab()
+} -->
+<!-- /ko -->
+
+<script type="text/html" id="tabContentTemplate">
+    <!-- ko foreach: sections -->
+        <!-- ko variant: {
+            data: $data,
+            names: {
+                'chart': 'chartSectionTemplate',
+                'project': 'projectSectionTemplate',
+                'templated': 'dataSectionTemplate'
+            }
+        } -->
+        <!-- /ko -->
+    <!-- /ko -->
+</script>
+
+<div class="block">
+    <div class="block-content as-next-tab">
+        <div class="tabs-navigation">
+            <!-- ko with: toPreviousTabOpt() -->
+                <div class="tabs-navigation-previous">
+                    PREVIOUS:
+                    <a data-bind="
+                        attr: { 'href': '#tab=' + index },
+                        click: function() { $parent.activate($data); return true; }
+                    ">
+                        <span data-bind="text: name"></span>
+                    </a>
+                </div>
+            <!-- /ko -->
+            <!-- ko with: toNextTabOpt() -->
+                <div class="tabs-navigation-next">
+                    NEXT:
+                    <a data-bind="
+                        attr: { 'href': '#tab=' + index },
+                        click: function() { $parent.activate($data); return true; }
+                    ">
+                        <span data-bind="text: name"></span>
+                    </a>
+                </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="dataSectionTemplate">
+    <div class="block">
+        <div class="block-content" data-bind="">
+            <div data-bind="css: {'statistics-box': name == 'Key Statistics'}">
+                <div class="section-name" data-bind="text: name, style: {'text-transform': name == 'Key Statistics' ? 'uppercase' : 'none'}"></div>
+                <div class="section-description" data-bind="text: description"></div>
+                <!-- ko variant: {
+                    data: data,
+                    names: {
+                        'Document'       : 'documentsSectionContentTemplate',
+                        'Other'          : 'otherResourcesSectionContentTemplate',
+                        'Key Statistics' : 'statisticsTemplate'
+                    }
+                } -->
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="block-shade"></div>
+    </div>
+</script>
+
+<script type="text/html" id="loadingTemplate">
+    Loading data...
+</script>
+
+
+@{ Html.RenderPartial("~/views/app/charts.cshtml"); }
+@{ Html.RenderPartial("~/views/app/documents.cshtml"); }
+@{ Html.RenderPartial("~/views/app/projects.cshtml"); }
+@{ Html.RenderPartial("~/views/app/statistics.cshtml"); }
+@{ Html.RenderPartial("~/views/app/globals.cshtml"); }

@@ -1,0 +1,35 @@
+﻿import * as ko from 'knockout';
+import * as $ from 'jquery';
+import { toDefaultOptions, download, display, toWriter } from 'models/saving';
+import { usePdf } from 'ui/pdf';
+import { renderNode } from 'ui/node2pdf';
+import * as upw from 'ui/pdf/writer';
+import * as el from 'essentials/list';
+import * as ec from 'essentials/core';
+
+var root = {
+    generate(_: any, e: any): void {
+
+<<<<<<< Updated upstream
+        var element: SVGSVGElement = <any> $(e.target).parents('svg')[0];
+        console.log('svg', element);
+
+=======
+>>>>>>> Stashed changes
+        usePdf(
+            toDefaultOptions([800, 800]),
+            doc => {
+                renderNode(
+                    e.currentTarget,
+                    toWriter(doc)
+                );
+            },
+            dataUrl =>  {
+                display(e.currentTarget.parentElement, dataUrl);
+            }
+        );
+    }
+};
+
+ko.applyBindings(root);
+

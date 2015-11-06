@@ -1,0 +1,75 @@
+﻿@import '../mixins';
+
+.page.as-main {
+
+    .country {
+        background: none;
+        text-align: center;
+        margin-bottom: @row-spacing * 2;
+    }
+
+    .block-content.as-splash {
+        background: url(splash.jpg) no-repeat;
+        height: 400px;
+        width: 1080px;
+        .app-splashscreen {
+            margin-top: @row-spacing * 3;
+            position: relative;
+        }
+    }
+
+    .app-name-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        .app-name {
+            position: relative;
+            font-size: 33px;
+            color: white;
+            left: -50%;
+            top: -50%;
+            margin-top: -27px;
+        }
+    }
+
+    .country-photo {
+    }
+
+    .country-intro {
+        margin: 0 auto;
+        text-align: center;
+        width: 800px;
+        font-size: 15px;
+    }
+
+
+    .country-name {
+        margin: @row-spacing * 3 0 @row-spacing * 2 0;
+        position: relative;
+
+        &::after {
+            content: '';
+            border: solid 10px transparent;
+            border-top-color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -5px;
+            margin-left: 130px;
+        }
+    }
+
+    .country-name select {
+        color: white;
+        .mix-rounded(40px);
+        background-color: #0B2442;
+
+        &::-ms-expand {
+            display: none;
+        }
+
+        border: 0 !important; /*Removes border*/
+        -webkit-appearance: none; /*Removes default chrome and safari style*/
+        -moz-appearance: none; /*Removes default style Firefox*/
+    }
+}

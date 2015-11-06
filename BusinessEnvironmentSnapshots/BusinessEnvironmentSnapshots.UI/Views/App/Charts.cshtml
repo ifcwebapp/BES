@@ -1,0 +1,227 @@
+﻿<script type="text/html" id="unloadedChartTemplate">
+</script>
+
+<script type="text/html" id="chartSectionTemplate">
+    <div class="block" data-bind="visible: hasNonEmptyCharts()">
+        <div class="block-content as-chart">
+            <div class="section">
+                <div class="section-name" data-bind="text: name"></div>
+                <div class="section-description" data-bind="text: description"></div>
+                <!-- ko foreach: heldCharts -->
+                <!-- ko variant: {
+                    data: $data,
+                    names: {
+                        'coming': 'unloadedChartTemplate',
+                        'failed': 'failedTemplate',
+                        'empty': 'emptyChartTemplate',
+                        'available': 'chartTemplate'
+                    }
+                } -->
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="block-shade"></div>
+    </div>
+</script>
+
+<script type="text/html" id="chartTemplate">
+    <!-- ko variant: {
+        data: $data,
+        names: {
+            'undeveloped-chart': 'undevelopedChartTemplate',
+            'single-chart': 'singleChartBundleTemplate',
+            'multi-chart': 'multiChartTemplate'
+        }
+    } -->
+    <!-- /ko -->
+</script>
+
+
+
+
+<script type="text/html" id="multiChartTemplate">
+    <div class="chart-container">
+        <div class="chart-name" data-bind="text: title"></div>
+        <div class="chart-description" data-bind="text: description"></div>
+        <div class="chart-tools">
+            <a href="#" data-bind="click: $root.saveImage">Save chart</a>
+            <!-- ko if: $root.shouldDisplayViewChartLink-->
+        |   <a href="#" data-bind="attr: { href: $root.toChartUrl(id) }">View chart</a>
+            <!-- /ko -->
+        </div>
+        <div class="chart-data">
+            <div class="chart-graph">
+                <!-- ko foreach: groups -->
+                <div class="chart-graph-canvas" data-bind="inject: function(element) { $parent.renderChart(element, $index()); }"></div>
+                <!-- /ko -->
+                <!-- ko template: 'legendTemplate' --><!-- /ko -->
+                <!-- ko template: { name: note != null ? 'chartNoteTemplate' : 'nothingTemplate' } --><!-- /ko -->
+                <!-- ko template: {
+                    name: sourceLink
+                        ? 'chartLinkTemplate'
+                        : 'chartNoLinkTemplate'
+                } --><!-- /ko -->
+            </div>
+            <div class="chart-table">
+                <!-- ko if: tableUnitLabel -->
+                <div class="chart-table-unit-label" data-bind="text: tableUnitLabel"></div>
+                <!-- /ko -->
+                <table class="chart-table-grid grid as-bordered as-for-chart">
+                    <tbody>
+                        <tr class="grid-row as-series-names">
+                            <td class="grid-cell" data-bind="text: tableIndicatorColumn"></td>
+                            <!-- ko template: {
+                                foreach: groups.reduce(function(r, v) { return r.concat(v.series); }, []),
+                                as: 'name'
+                            } -->
+                            <td class="grid-cell" data-bind="text: name"></td>
+                            <!-- /ko -->
+                        </tr>
+                        <!-- ko template: { foreach: categories, as: 'category' } -->
+                        <tr>
+                            <td data-bind="text: category"></td>
+                            <!-- ko template: {
+                                foreach: $parent.groups.reduce(
+                                    function(r, group) {
+                                        return r.concat(
+                                            group.series.map(
+                                                function(serie) {
+                                                    return {
+                                                        valueSuffixOpt: group.valueSuffixOpt,
+                                                        serie: serie
+                                                    };
+                                                }
+                                            )
+                                        );
+                                    },
+                                    []
+                                ),
+                                as: 'bundle'
+                            } -->
+                            <td class="as-value" data-bind="
+                                text: $root.formatReading(
+                                    bundle.serie.values[$parentContext.$index()],
+                                    bundle.valueSuffixOpt
+                                )
+                            "></td>
+                            <!-- /ko -->
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="singleChartBundleTemplate">
+
+    <div class="chart-container">
+        <div class="chart-name" data-bind="text: title"></div>
+        <div class="chart-description" data-bind="text: description"></div>
+        <div class="chart-tools">
+            <a href="#" data-bind="click: $root.saveImage">Save chart</a>
+            <!-- ko if: $root.shouldDisplayViewChartLink-->
+            |   <a href="#" data-bind="attr: { href: $root.toChartUrl(id) }">View chart</a>
+            <!-- /ko -->
+        </div>
+        <div class="chart-data">
+            <div class="chart-graph">
+                <div class="chart-graph-canvas" data-bind="inject: renderChart"></div>
+                <!-- ko template: 'legendTemplate' --><!-- /ko -->
+                <!-- ko template: { name: note != null ? 'chartNoteTemplate' : 'nothingTemplate' } --><!-- /ko -->
+                <!-- ko template: {
+                    name: sourceLink
+                        ? 'chartLinkTemplate'
+                        : 'chartNoLinkTemplate'
+                } --><!-- /ko -->
+            </div>
+            <div class="chart-table">
+                <!-- ko if: tableUnitLabel -->
+                <div class="chart-table-unit-label" data-bind="text: tableUnitLabel"></div>
+                <!-- /ko -->
+                <table class="chart-table-grid grid as-bordered as-for-chart">
+                    <tbody>
+                        <tr class="grid-row as-series-names">
+                            <td class="grid-cell" data-bind="text: tableIndicatorColumn"></td>
+                            <!-- ko template: { foreach: series, as: 'name' } -->
+                            <td class="grid-cell" data-bind="text: name"></td>
+                            <!-- /ko -->
+                        </tr>
+                        <!-- ko template: { foreach: categories, as: 'category' } -->
+                        <tr>
+                            <td data-bind="text: category"></td>
+                            <!-- ko template: { foreach: $parent.series, as: 'serie' } -->
+                            <td class="as-value" data-bind="
+                                text: $root.formatReading(
+                                    serie.values[$parentContext.$index()],
+                                    $parent.valueSuffixOpt
+                                )"></td>
+                            <!-- /ko -->
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</script>
+
+<script type="text/html" id="chartNoteTemplate">
+    <div class="chart-note" data-bind="text: note"></div>
+</script>
+
+<script type="text/html" id="legendTemplate">
+    <div class="chart-legend" data-bind="inject: renderLegend"></div>
+</script>
+
+<script type="text/html" id="chartNoLinkTemplate">
+    <div class="chart-link">
+        Source: <span data-bind="text: sourceTitle.replace(/^Source:\s*/, '')"></span>
+    </div>
+</script>
+
+<script type="text/html" id="chartLinkTemplate">
+    <div class="chart-link">
+        Source: <a href="#" target="_blank" data-bind="attr: { 'href': sourceLink }, text: sourceTitle.replace(/^Source:\s*/, '')"></a>
+    </div>
+</script>
+
+<script type="text/html" id="undevelopedChartTemplate">
+    <div class="chart-container as-unfinished">
+        <div class="chart-name" data-bind="text: title"></div>
+        <div class="chart-description" data-bind="text: description"></div>
+        <div class="chart">
+            <table class="banner">
+                <tr>
+                    <td>
+                        <div>No data</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="failedTemplate">
+    <div class="chart-container as-problem">
+        <div class="chart-name"></div>
+        <div class="chart">
+            <table class="banner">
+                <tr>
+                    <td>
+                        <div data-bind="text: $data"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="emptyChartTemplate">
+    <!-- AB: we don't display anything for empty charts -->
+</script>

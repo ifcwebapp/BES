@@ -1,0 +1,5 @@
+﻿Years=MostRecent
+RegionData=AVGd
+IncomeData=AVG
+[Indicators]
+IndicatorName=Access to electricity (% of population)

@@ -1,0 +1,13 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Starting a Business: DTF progress
+IndicatorName=Dealing with Construction Permits: DTF progress
+IndicatorName=Getting Electricity: DTF progress
+IndicatorName=Registering Property: DTF progress
+IndicatorName=Getting Credit: DTF progress
+IndicatorName=Protecting Minority Investors: DTF progress
+IndicatorName=Paying Taxes: DTF progress
+IndicatorName=Trading Across Borders: DTF progress
+IndicatorName=Enforcing Contracts: DTF progress
+IndicatorName=Resolving Insolvency: DTF progress

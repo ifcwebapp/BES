@@ -1,0 +1,52 @@
+﻿@using System.Text.RegularExpressions
+@{
+    ViewBag.PageCssQualifier = "as-main";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+
+@section scripts {
+    @{
+        var countryCode = HttpContext.Current.Request.QueryString["countryCode"];
+        var baseHostAndPortUri = new Uri(HttpContext.Current.Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped));
+        var basePath = Url.Content("~");
+    }
+    <script type="text/javascript">
+
+        var require = require || {};
+        require.config = require.config || {};
+        require.config['models/externals'] = {
+            baseApiUrl: '@basePath',
+            countries: @Html.Raw(this.Model.Countries)
+        };
+
+    </script>
+    <script type="text/javascript"
+            src="@Url.Content("~/libs/requirejs/require.js")"
+            data-main="@Url.Content("~/Scripts/app/models/main/root.js")">
+    </script>
+}
+
+<div class="block as-wider">
+    <div class="block-content as-splash">
+        <div class="app-name-container">
+            <div class="app-name">Investment Climate Snapshot</div>
+        </div>
+    </div>
+</div>
+
+<div class="block as-wider">
+    <div class="block-shade">
+        <div class="country">
+            <div class="country-name" data-bind="template: { name: 'countriesContentTemplate', data: navigation }"></div>
+            <div class="country-intro">The Investment Climate Snapshot is a one-stop guide for benchmarking business environment performance across over 180 countries. Available as an interactive website and a PDF report, each country's IC Snapshot presents the relevant indicators from a variety of sources, arranged thematically to facilitate insights on specific issue areas. Practitioners can use the IC Snapshot as a compact country briefing, and as a source for pre-made charts and tables for key data. The IC Snapshot also compiles the World Bank Group's projects and publications related to trade and competitiveness.</div>
+        </div>
+    </div>
+</div>
+
+<div class="block" style="z-index: 1;">
+    <div class="block-content">
+    </div>
+</div>
+
+@{ Html.RenderPartial("~/views/app/globals.cshtml"); }

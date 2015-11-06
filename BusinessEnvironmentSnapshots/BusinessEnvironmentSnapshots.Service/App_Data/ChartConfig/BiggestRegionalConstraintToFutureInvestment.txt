@@ -1,0 +1,21 @@
+Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Top constraint in next year: Political risk
+IndicatorName=Top constraint in next year: Access to qualified staff
+IndicatorName=Top constraint in next year: Macroeconomic instability
+IndicatorName=Top constraint in next year: Access to financing
+IndicatorName=Top constraint in next year: Infrastructure capacity
+IndicatorName=Top constraint in next year: Limited market opportunities
+IndicatorName=Top constraint in next year: Corruption
+IndicatorName=Top constraint in next year: Post-financial crisis regulation
+IndicatorName=Top constraint in next year: Other
+IndicatorName=Top constraint in next 3 years: Political risk
+IndicatorName=Top constraint in next 3 years: Access to qualified staff
+IndicatorName=Top constraint in next 3 years: Macroeconomic instability
+IndicatorName=Top constraint in next 3 years: Access to financing
+IndicatorName=Top constraint in next 3 years: Infrastructure capacity
+IndicatorName=Top constraint in next 3 years: Limited market opportunities
+IndicatorName=Top constraint in next 3 years: Corruption
+IndicatorName=Top constraint in next 3 years: Post-financial crisis regulation
+IndicatorName=Top constraint in next 3 years: Other

@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_ScriptsLayout.cshtml";
+}
+
+@section head {
+    <link href="@Url.Content("~/libs/normalize-css/normalize.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/styles/root.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("head", false)
+}
+
+@section scripts {
+    @RenderSection("scripts")
+}
+@RenderBody()

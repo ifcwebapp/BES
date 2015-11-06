@@ -1,0 +1,8 @@
+﻿Years=PreviousFromMostRecent,MostRecent
+ParseYear=PerCountry
+RegionData=ES
+WorldData=ES
+[Indicators]
+IndicatorName=Infrastructure: Number of electrical outages in a typical month
+IndicatorName=Infrastructure: Duration of a typical electrical outage (hours)
+IndicatorName=Infrastructure: Losses due to electrical outages (% of annual sales)

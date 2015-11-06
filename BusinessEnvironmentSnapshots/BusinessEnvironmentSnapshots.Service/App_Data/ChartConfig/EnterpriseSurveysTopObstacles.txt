@@ -1,0 +1,18 @@
+﻿Years=PreviousFromMostRecent,MostRecent
+RegionData=ES
+[Indicators]
+IndicatorName=Biggest obstacle: Practices of the informal sector
+IndicatorName=Biggest obstacle: Corruption
+IndicatorName=Biggest obstacle: Electricity
+IndicatorName=Biggest obstacle: Access to finance
+IndicatorName=Biggest obstacle: Political instability
+IndicatorName=Biggest obstacle: Tax rates
+IndicatorName=Biggest obstacle: Access to land
+IndicatorName=Biggest obstacle: Customs and trade regulations
+IndicatorName=Biggest obstacle: Crime, theft and disorder
+IndicatorName=Biggest obstacle: Tax administration
+IndicatorName=Biggest obstacle: Transportation
+IndicatorName=Biggest obstacle: Business licensing and permits
+IndicatorName=Biggest obstacle: Inadequately educated workforce
+IndicatorName=Biggest obstacle: Labor regulations
+IndicatorName=Biggest obstacle: Courts

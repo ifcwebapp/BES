@@ -1,0 +1,27 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=1st pillar: Institutions
+IndicatorName=2nd pillar: Infrastructure
+IndicatorName=3rd pillar: Macroeconomic environment
+IndicatorName=4th pillar: Health and primary education
+IndicatorName=5th pillar: Higher education and training
+IndicatorName=6th pillar: Goods market efficiency
+IndicatorName=7th pillar: Labor market efficiency
+IndicatorName=8th pillar: Financial market development
+IndicatorName=9th pillar: Technological readiness
+IndicatorName=10th pillar: Market size
+IndicatorName=11th pillar: Business sophistication 
+IndicatorName=12th pillar: Innovation
+IndicatorName=1st pillar: Institutions (rank)
+IndicatorName=2nd pillar: Infrastructure (rank)
+IndicatorName=3rd pillar: Macroeconomic environment (rank)
+IndicatorName=4th pillar: Health and primary education (rank)
+IndicatorName=5th pillar: Higher education and training (rank)
+IndicatorName=6th pillar: Goods market efficiency (rank)
+IndicatorName=7th pillar: Labor market efficiency (rank)
+IndicatorName=8th pillar: Financial market development (rank)
+IndicatorName=9th pillar: Technological readiness (rank)
+IndicatorName=10th pillar: Market size (rank)
+IndicatorName=11th pillar: Business sophistication  (rank)
+IndicatorName=12th pillar: Innovation (rank)

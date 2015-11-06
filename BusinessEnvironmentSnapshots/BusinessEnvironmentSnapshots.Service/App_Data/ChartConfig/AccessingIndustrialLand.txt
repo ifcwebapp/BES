@@ -1,0 +1,7 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Accessing Industrial Land: Strength of lease rights index (0 = min, 100 = max)
+IndicatorName=Accessing Industrial Land: Strength of ownership rights index (0 = min, 1= max)
+IndicatorName=Accessing Industrial Land: Access to land information index (0 = min, 100 = max)
+IndicatorName=Accessing Industrial Land: Availability of land information index (0 = min, 100 = max)

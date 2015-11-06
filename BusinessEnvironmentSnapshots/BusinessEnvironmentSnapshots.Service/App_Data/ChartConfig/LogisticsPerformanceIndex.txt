@@ -1,0 +1,9 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Logistics performance index: Efficiency of customs clearance process (1=low to 5=high)
+IndicatorName=Logistics performance index: Quality of trade and transport-related infrastructure (1=low to 5=high)
+IndicatorName=Logistics performance index: Ease of arranging competitively priced shipments (1=low to 5=high)
+IndicatorName=Logistics performance index: Competence and quality of logistics services (1=low to 5=high)
+IndicatorName=Logistics performance index: Frequency with which shipments reach consignee within scheduled or expected time (1=low to 5=high)
+IndicatorName=Logistics performance index: Ability to track and trace consignments (1=low to 5=high)

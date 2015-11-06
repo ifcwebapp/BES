@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E90EEA9E-6738-4E2E-AC67-60740EB1CEDB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessEnvironmentSnapshots.Database</RootNamespace>
+    <AssemblyName>BusinessEnvironmentSnapshots.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc">
+      <HintPath>..\packages\ncalc.1.3.8\lib\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BankProject.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ChartConfigParser.cs" />
+    <Compile Include="ChartRepository\Repository.BestPracticesForInvestmentPromotion.cs" />
+    <Compile Include="ChartRepository\Repository.OtherResources.cs" />
+    <Compile Include="ChartRepository\Repository.DoingBusinessIndicators.cs" />
+    <Compile Include="ChartRepository\Repository.DoingBusinessRanking.cs" />
+    <Compile Include="ChartRepository\Repository.ElectricityOutages.cs" />
+    <Compile Include="ChartRepository\Repository.MostProblematicFactors.cs" />
+    <Compile Include="ChartRepository\Repository.ReformsValidatedByDoingBusiness.cs" />
+    <Compile Include="ChartRepository\Repository.PayingTaxesRates.cs" />
+    <Compile Include="ChartRepository\Repository.Electricity.cs" />
+    <Compile Include="ChartRepository\Repository.CostToImportAndExport.cs" />
+    <Compile Include="ChartRepository\Repository.LogisticsPerformanceIndex.cs" />
+    <Compile Include="ChartRepository\Repository.StartingForeignBusiness.cs" />
+    <Compile Include="ChartRepository\Repository.ForeignEquityOwnershipAllowed.cs" />
+    <Compile Include="ChartRepository\Repository.AccessingIndustrialLand.cs" />
+    <Compile Include="ChartRepository\Repository.StrengthOfInsolvencyFrameworkIndices.cs" />
+    <Compile Include="ChartRepository\Repository.LendingVsDepositInterestRates.cs" />
+    <Compile Include="ChartRepository\Repository.CreditToPrivateSector.cs" />
+    <Compile Include="ChartRepository\Repository.PublicAndPrivateCreditCoverage.cs" />
+    <Compile Include="ChartRepository\Repository.GettingCreditIndices.cs" />
+    <Compile Include="ChartRepository\Repository.ManagementTimeSpentWithRequirementsOfRegulation.cs" />
+    <Compile Include="ChartRepository\Repository.NewFirmRegistrationRate.cs" />
+    <Compile Include="ChartRepository\Repository.RegulatoryQuality.cs" />
+    <Compile Include="ChartRepository\Repository.cs" />
+    <Compile Include="ChartRepository\Repository.ArbitratingCommercialDisputes.cs" />
+    <Compile Include="ChartRepository\Repository.ProtectingMinorityInvestorsIndices.cs" />
+    <Compile Include="ChartRepository\Repository.OverallDistanceToFrontier.cs" />
+    <Compile Include="ChartRepository\Repository.EnterpriseSurveysTopObstacles.cs" />
+    <Compile Include="ChartRepository\Repository.Projects.cs" />
+    <Compile Include="ChartRepository\Repository.Documents.cs" />
+    <Compile Include="ChartRepository\Repository.WorldwideGovernanceIndicators.cs" />
+    <Compile Include="ChartRepository\Repository.BiggestRegionalConstraintToFutureInvestment.cs" />
+    <Compile Include="ChartRepository\Repository.OpennessToTrade.cs" />
+    <Compile Include="ChartRepository\Repository.ReportedRegionalInvestmentChanges.cs" />
+    <Compile Include="ChartRepository\Repository.ControlOfCorruption.cs" />
+    <Compile Include="ChartRepository\Repository.FirmsExpectedToPayBribes.cs" />
+    <Compile Include="ChartRepository\Repository.ContractEnforcementTime.cs" />
+    <Compile Include="ChartRepository\Repository.DistanceToFrontierByIndicator.cs" />
+    <Compile Include="ChartRepository\Repository.GlobalCompetitivenessPillars.cs" />
+    <Compile Include="ChartRepository\Repository.GlobalCompetitivenessIndex.cs" />
+    <Compile Include="ChartRepository\Repository.Statistics.cs" />
+    <Compile Include="ChartRepository\Repository.Countries.cs" />
+    <Compile Include="Country.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseRepository.cs" />
+    <Compile Include="DbLogFormatter.cs" />
+    <Compile Include="DB\GetCountriesInfo_Result.cs" />
+    <Compile Include="DB\GetSupportedIndicatorsResult.cs" />
+    <Compile Include="DB\GetIndicatorsInfoResult.cs" />
+    <Compile Include="DB\GetValuesResult.cs" />
+    <Compile Include="DB\GetValuesForCountryResult.cs" />
+    <Compile Include="EFLoggerForTesting.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="GetAllTabs_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetChartInfo_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCountriesInfo_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCountryInfo_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetDocuments_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetIndicatorsInfo_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetOtherResources_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetValuesForCountry_Result.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdComparer.cs" />
+    <Compile Include="IndicatorComparer.cs" />
+    <Compile Include="KnownChartIds.cs" />
+    <Compile Include="Model\AdditionalDataPoint.cs" />
+    <Compile Include="Model\Axis.cs" />
+    <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\Options.cs" />
+    <Compile Include="Model\PointToSet.cs" />
+    <Compile Include="Model\SerieCountryType.cs" />
+    <Compile Include="Model\Document.cs" />
+    <Compile Include="Model\ErrorPoint.cs" />
+    <Compile Include="Model\KeyStatistics.cs" />
+    <Compile Include="Model\OtherResource.cs" />
+    <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\Section.cs" />
+    <Compile Include="Model\SerieType.cs" />
+    <Compile Include="Model\SortingDirection.cs" />
+    <Compile Include="Model\Tab.cs" />
+    <Compile Include="Model\Tooltip.cs" />
+    <Compile Include="Model\Xaxis.cs" />
+    <Compile Include="Model\Chart.cs" />
+    <Compile Include="Model\ChartSeries.cs" />
+    <Compile Include="Model\Point.cs" />
+    <Compile Include="Model\Yaxis.cs" />
+    <Compile Include="MyDbConfiguration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticsSource.cs">
+      <DependentUpon>BesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="BesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BesModel.edmx</DependentUpon>
+      <LastGenOutput>BesModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="BesModel.edmx.diagram">
+      <DependentUpon>BesModel.edmx</DependentUpon>
+    </None>
+    <None Include="BesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BesModel.edmx</DependentUpon>
+      <LastGenOutput>BesModel.cs</LastGenOutput>
+    </None>
+    <Compile Include="ChartRepository\Repository.Tabs.cs" />
+    <Compile Include="ChartRepository\Repository.Ordering.cs" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

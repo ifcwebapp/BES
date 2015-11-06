@@ -1,0 +1,13 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Starting a Business: Reforms since DB2006
+IndicatorName=Dealing with Construction Permits: Reforms since DB2006
+IndicatorName=Getting Electricity: Reforms since DB2006
+IndicatorName=Registering Property: Reforms since DB2006
+IndicatorName=Getting Credit: Reforms since DB2006
+IndicatorName=Protecting Minority Investors: Reforms since DB2006
+IndicatorName=Paying Taxes: Reforms since DB2006
+IndicatorName=Trading Across Borders: Reforms since DB2006
+IndicatorName=Enforcing Contracts: Reforms since DB2006
+IndicatorName=Resolving Insolvency: Reforms since DB2006

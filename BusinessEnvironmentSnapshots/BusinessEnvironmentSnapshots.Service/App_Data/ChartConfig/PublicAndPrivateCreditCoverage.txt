@@ -1,0 +1,5 @@
+﻿Years=MostRecent
+RegionData=AVGd
+[Indicators]
+IndicatorName=Getting Credit: Public registry coverage (% of adults)
+IndicatorName=Getting Credit: Private bureau coverage (% of adults)
