@@ -40,37 +40,3 @@ You need to:
 2. Unzip and put the file to BusinessEnvironmentSnapshots/BusinessEnvironmentSnapshots.Service/App_Data
 3. Run the project in Visual Studio
 
-### Chart API
-
-Service API - api/chart?id={chartId}&countryCode={countryCode}&years=[list of years]
-
-countryCode and id are required parameters, years is optional
-
-Use country code KEN for tests
-
-Available chart Ids:
-* DistanceToFrontierByIndicator
-* GlobalCompetitivenessIndex
-* GlobalCompetitivenessPillars
-* OverallDistanceToFrontier
-* EnterpriseSurveysTopObstacles
-* BiggestRegionalConstraintToFutureInvestment
-* WorldwideGovernanceIndicators
-* FirmsExpectedToPayBribes
-* ControlOfCorruption
-* ArbitratingCommercialDisputes
-* ContractEnforcementTime
-* ProtectingMinorityInvestorsIndices
-* RegulatoryQuality
-* ManagementTimeSpentWithRequirementsOfRegulation
-* NewFirmRegistrationRate
-* StartingBusiness
-* ConstructionPermittingTime
-* CostOfRegisteringProperty
-* ReportedRegionalInvestmentChanges
-* OpennessToTrade
-
-Format of year list:
-year[-year][,year] where year is integer or string.
-Acceptable string values: MostRecent, LastRecent
-
