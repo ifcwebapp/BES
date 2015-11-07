@@ -1,0 +1,67 @@
+;
+Africa;
+Andean Countries;
+Arab Republic of;
+Aral Sea;
+Asia;
+Bahamas;Bahamas, The
+Caribbean;
+Caucasus;
+Central Africa;
+Central America;
+Central Asia;
+Congo, Democratic Republic of;Congo, Dem. Rep.
+Congo, Republic of;Congo, Rep.
+Cook Islands;
+Cote dIvoire;Cote d'Ivoire
+East Asia and Pacific;
+Eastern Africa;
+Egypt;Egypt, Arab Rep.
+Egypt, Arab Republic of;Egypt, Arab Rep.
+EU Accession Countries;
+Europe;
+Europe and Central Asia;
+Federated States of;
+former Yugoslav Republic of;
+Gambia;Gambia, The
+Hong Kong SAR;Hong Kong SAR, China
+Iran;Iran, Islamic Rep.
+Islamic Republic of;
+Kazakhstan-KZ;Kazakhstan
+Korea, Democratic Peoples Republic of;Korea, Dem. Rep.
+Korea, Republic of;Korea, Rep.
+Lao Peoples Democratic Republic;Lao PDR
+Lao People's Democratic Republic;Lao PDR
+Laos;Lao PDR
+Latin America;
+Macedonia;Macedonia, FYR
+Mekong;
+Mercosur;
+Micronesia;Micronesia, Fed. Sts.
+Middle East and North Africa;
+Montserrat;
+Multi-Regional;
+Netherlands Antilles;
+Northern Africa;
+OECS Countries;
+Pacific Islands;
+PNG  PI;
+Republic of;
+Republica Bolivariana de;
+South Asia;
+South East Asia and Mongolia;
+South Eastern Europe and Balkans;
+Southern Africa;
+Taiwan;Taiwan, China
+Tanzania and Uganda;Tanzania;Uganda
+The;
+Venezuela;Venezuela, RB
+Western Africa;
+World;
+Yemen;Yemen, Rep.
+Lao People's Democra;Lao PDR
+Macedonia, former Yu;Macedonia, FYR
+Yemen, Republic of;Yemen, Rep.
+Macedonia, former Yugoslav Republic of;Macedonia, FYR
+Bosnia and Herzegovi;Bosnia and Herzegovina
+Egypt, Arab Republic;Egypt, Arab Rep.

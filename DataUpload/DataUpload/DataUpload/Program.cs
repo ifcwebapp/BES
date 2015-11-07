@@ -140,9 +140,50 @@ namespace DataUpload
             }
         }
 
+        private static string GetLinkValue(ExcelWorksheet sheet, int row, int column)
+        {
+            var cell = sheet.Cells[row, column];
+            if (cell.Value != null)
+            {
+                if (cell.Hyperlink != null)
+                {
+                    return cell.Hyperlink.ToString();
+                }
+                else
+                {
+                    return cell.Value.ToString().Trim();
+                }
+            }
+            else
+            {
+                return String.Empty;
+            }
+        }
+
+        private static Dictionary<string, List<string>> LoadCountryAliases()
+        {
+            var result = new Dictionary<string, List<string>>();
+            using (var sr = new StreamReader(@"..\..\InvalidCountries.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    var arr = line.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (arr.Length > 1)
+                    {
+                        result.Add(arr[0], new List<string>(arr.ToList().GetRange(1, arr.Length - 1)));
+                    }
+                }
+            }
+
+            return result;
+        }
+
         private static void UploadProjects(string fileName)
         {
+            var invalidCountries = new Dictionary<string, string>();
             var countries = GetCountries().ToDictionary(c => c.Name, c => c);
+            var aliases = LoadCountryAliases();
 
             var fi = new FileInfo(fileName);
             using (var p = new ExcelPackage(fi))
@@ -153,17 +194,20 @@ namespace DataUpload
                 int errors = 0;
                 while (true)
                 {
-                    var countryName = GetValue(sheet, i, 1);
+                    var countryName = GetValue(sheet, i, 1).Trim();
                     if (String.IsNullOrEmpty(countryName)) break;
                     Country country = null;
-                    if (!countries.ContainsKey(countryName))
+                    if (!countries.ContainsKey(countryName) && !aliases.ContainsKey(countryName))
                     {
-                        log.Error(String.Format("Country {0} does not exist", countryName));
-                        errors++;
+                        log.Error(String.Format("Country {0} in row {1} does not exist", countryName, i));
+                        if (!invalidCountries.ContainsKey(countryName))
+                        {
+                            invalidCountries.Add(countryName, "");
+                        }
                     }
                     else
                     {
-                        country = countries[countryName];
+                        country = countries.ContainsKey(countryName) ? countries[countryName] : countries[aliases[countryName].First()];
                     }
                     var projectStatus = GetValue(sheet, i, 2);
                     var projectId = GetValue(sheet, i, 3);
@@ -171,21 +215,26 @@ namespace DataUpload
                     var amountString = GetValue(sheet, i, 5);
                     var approvalDateString = GetValue(sheet, i, 6);
                     var projectType = GetValue(sheet, i, 7);
-                    var projectLink = GetValue(sheet, i, 8);
+                    var projectLink = GetLinkValue(sheet, i, 8);
 
-                    double amount;
-                    if (!Double.TryParse(amountString, out amount))
+                    double? amount = null;
+                    double amt;
+                    if (!Double.TryParse(amountString, out amt))
                     {
                         log.ErrorFormat("Amount {0} in row {1} should be floating point number", amountString, i);
-                        errors++;
+                        
+                    }
+                    else
+                    {
+                        amount = amt;
                     }
                     var approvalDate = ParseTime(approvalDateString, i);
-                    if (!approvalDate.HasValue) errors++;
+                    //if (!approvalDate.HasValue) errors++;
 
                     var project = new Project
                     {
                         Amount = amount,
-                        ApprovalDate = approvalDate.HasValue ? approvalDate.Value : DateTime.MinValue,
+                        ApprovalDate = approvalDate,
                         Country = countryName,
                         CountryCode = country != null ? country.Code : String.Empty,
                         Link = projectLink,
@@ -198,10 +247,19 @@ namespace DataUpload
                     loadCandidates.Add(project);
                     i++;
                 }
-                if (errors == 0)
+
+                using (var sw = new StreamWriter("country_issues.txt"))
                 {
-                    LoadProjectsToDatabase(loadCandidates);
+                    var orderedKeys = invalidCountries.Keys.OrderBy(k => k);
+                    foreach (var invalidCountry in orderedKeys)
+                    {
+                        sw.WriteLine(invalidCountry + ";");
+                    }
+                    invalidCountries.Clear();
                 }
+
+                LoadProjectsToDatabase(loadCandidates);
+                
             }
         }
 
@@ -292,7 +350,7 @@ namespace DataUpload
                     if (test == null || String.IsNullOrEmpty(test.ToString().Trim())) break;
                     
                     var indicatorName = GetValue(sheet, i , 1);
-                    var indicator = indicators.FirstOrDefault(ind => ind.Name.ToLower() == indicatorName.ToLower());
+                    var indicator = indicators.FirstOrDefault(ind => ind.Name.ToLower().Trim() == indicatorName.ToLower().Trim());
                     int indicatorIndex = -1;
                     if (indicator != null)
                     {
