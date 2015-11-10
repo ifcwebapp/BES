@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using DataUpload.Properties;
 using log4net;
 using log4net.Core;
 using OfficeOpenXml;
@@ -69,6 +71,13 @@ namespace DataUpload
         public double? Amount { get; set; }
     }
 
+    internal class ChartData
+    {
+        public string Id { get; set; }
+        public string SourceTitle { get; set; }
+        public string SourceLink { get; set; }
+    }
+
     class Program
     {
         private static log4net.ILog log;
@@ -76,10 +85,10 @@ namespace DataUpload
         {
             Logger.Setup();
             log = LogManager.GetLogger("default");
-
+            var truncateTable = args.Length == 2 || (args.Length > 2 && Boolean.Parse(args[2]));
             try
             {
-                if (args.Length != 2)
+                if (args.Length < 2)
                 {
                     log.Error(
                         "Wrong number of arguments: expected 2 - type of request and file name without spaces in it");
@@ -88,10 +97,13 @@ namespace DataUpload
                 switch (args[0])
                 {
                     case "indicatorValues":
-                        UploadMoreData(args[1]);
+                        UploadMoreData(args[1], truncateTable);
                         break;
                     case "projects":
-                        UploadProjects(args[1]);
+                        UploadProjects(args[1], truncateTable);
+                        break;
+                    case "chartData":
+                        UpdateChartData(args[1]);
                         break;
                 }
 
@@ -179,7 +191,7 @@ namespace DataUpload
             return result;
         }
 
-        private static void UploadProjects(string fileName)
+        private static void UploadProjects(string fileName, bool truncateTable)
         {
             var invalidCountries = new Dictionary<string, string>();
             var countries = GetCountries().ToDictionary(c => c.Name, c => c);
@@ -258,8 +270,40 @@ namespace DataUpload
                     invalidCountries.Clear();
                 }
 
-                LoadProjectsToDatabase(loadCandidates);
+                LoadProjectsToDatabase(loadCandidates, truncateTable, fileName.Replace(".xlsx", ".sql"));
                 
+            }
+        }
+
+        private static void UpdateChartData(string fileName)
+        {
+            var fi = new FileInfo(fileName);
+            using (var p = new ExcelPackage(fi))
+            {
+                var sheet = p.Workbook.Worksheets[1];
+                var loadCandidates = new List<ChartData>();
+                int i = 2;
+                int errors = 0;
+                while (true)
+                {
+                    var chartId = GetValue(sheet, i, 1).Trim();
+                    if (String.IsNullOrEmpty(chartId)) break;
+                    var chartSourceTitle = GetValue(sheet, i, 3);
+                    var chartSourceLink = GetLinkValue(sheet, i, 4);
+
+
+                    var project = new ChartData
+                    {
+                        Id = chartId,
+                        SourceLink = chartSourceLink, SourceTitle = chartSourceTitle
+                    };
+
+                    loadCandidates.Add(project);
+                    i++;
+                }
+
+                UpdateChartDataInDatabase(loadCandidates, fileName.Replace(".xlsx", ".sql"));
+
             }
         }
 
@@ -316,7 +360,7 @@ namespace DataUpload
             return result;
         }
 
-        private static void UploadMoreData(string fileName)
+        private static void UploadMoreData(string fileName, bool truncateTable)
         {
             var countries = GetCountries().ToDictionary(c => c.Code, c => c.SheetIndex);
             var indicators = GetIndicators().ToList();
@@ -386,74 +430,172 @@ namespace DataUpload
                     i++;
                 }
 
-                LoadValuesToDatabase(loadCandidates);
+                LoadValuesToDatabase(loadCandidates, truncateTable, fileName.Replace(".xlsx", ".sql"));
             }
         }
 
-        private static void LoadProjectsToDatabase(IEnumerable<Project> values)
+        private static void LoadProjectsToDatabase(IEnumerable<Project> values, bool truncateTable, string fileName = "")
         {
-            using (var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
+            using (
+                var sw = !String.IsNullOrEmpty(fileName) && Settings.Default.PrintSql
+                    ? new StreamWriter(fileName)
+                    : null)
             {
-                sqlConnection.Open();
-                using (var command = sqlConnection.CreateCommand())
+                using (
+                    var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString)
+                    )
                 {
-                    command.CommandText = "truncate table BankProjectStag";
-                    command.ExecuteNonQuery();
-
-                    foreach (var indicatorValue in values)
+                    sqlConnection.Open();
+                    using (var command = sqlConnection.CreateCommand())
                     {
-
-                        if (indicatorValue.CountryCode != null)
+                        if (truncateTable)
                         {
-                            
-
-                            command.CommandText =
-                                "insert into BankProjectStag([CountryCode], [ProjectId], [ProjectName], [ApprovalDate], [ProjectType], [ProjectLink], [ProjectStatus], [Amount]) values(@v1, @v2, @v3, @v4, @v5, @v6, @v7, @v8)";
-
-                            command.Parameters.Clear();
-                            command.Parameters.AddRange(new[]
-                            {
-                                new SqlParameter("v1", indicatorValue.CountryCode),
-                                new SqlParameter("v2", indicatorValue.ProjectId),
-                                new SqlParameter("v3", indicatorValue.Name),
-                                indicatorValue.ApprovalDate.HasValue ? new SqlParameter("v4", indicatorValue.ApprovalDate) : new SqlParameter("v4",  DBNull.Value),
-                                new SqlParameter("v5", indicatorValue.Type),
-                                String.IsNullOrEmpty(indicatorValue.Link) ? new SqlParameter("v6",  DBNull.Value) : new SqlParameter("v6", indicatorValue.Link),
-                                new SqlParameter("v7", indicatorValue.Status),
-                                !indicatorValue.Amount.HasValue ? new SqlParameter("v8",  DBNull.Value) : new SqlParameter("v8", indicatorValue.Amount.Value),
-                            });
+                            command.CommandText = "truncate table BankProjectStag";
                             command.ExecuteNonQuery();
+                            PrintSql(command, sw);
+                        }
+                        foreach (var indicatorValue in values)
+                        {
+
+                            if (indicatorValue.CountryCode != null)
+                            {
+
+
+                                command.CommandText =
+                                    "insert into BankProjectStag([CountryCode], [ProjectId], [ProjectName], [ApprovalDate], [ProjectType], [ProjectLink], [ProjectStatus], [Amount]) values(@v1, @v2, @v3, @v4, @v5, @v6, @v7, @v8)";
+
+                                command.Parameters.Clear();
+                                command.Parameters.AddRange(new[]
+                                {
+                                    new SqlParameter("v1", indicatorValue.CountryCode),
+                                    new SqlParameter("v2", indicatorValue.ProjectId),
+                                    new SqlParameter("v3", indicatorValue.Name),
+                                    indicatorValue.ApprovalDate.HasValue
+                                        ? new SqlParameter("v4", indicatorValue.ApprovalDate)
+                                        : new SqlParameter("v4", DBNull.Value),
+                                    new SqlParameter("v5", indicatorValue.Type),
+                                    String.IsNullOrEmpty(indicatorValue.Link)
+                                        ? new SqlParameter("v6", DBNull.Value)
+                                        : new SqlParameter("v6", indicatorValue.Link),
+                                    new SqlParameter("v7", indicatorValue.Status),
+                                    !indicatorValue.Amount.HasValue
+                                        ? new SqlParameter("v8", DBNull.Value)
+                                        : new SqlParameter("v8", indicatorValue.Amount.Value),
+                                });
+                                command.ExecuteNonQuery();
+                                PrintSql(command, sw);
+                            }
                         }
                     }
                 }
             }
         }
 
-        private static void LoadValuesToDatabase(IEnumerable<IndicatorValue> values)
+        private static void PrintSql(SqlCommand cmd, StreamWriter sw)
         {
-            using (var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
+            if (sw != null)
             {
-                sqlConnection.Open();
-                using (var command = sqlConnection.CreateCommand())
-                {
-                    command.CommandText =
-                            "truncate table indicatorvaluestag";
-                    command.ExecuteNonQuery();
+                string query = cmd.CommandText;
 
-                    command.CommandText =
-                            "insert into indicatorvaluestag(indicatorid, countryid, year, indicatorvalue) values(@v1, @v2, @v3, @v4)";
-                    foreach (var indicatorValue in values)
+                foreach (SqlParameter p in cmd.Parameters)
+                {
+                    query = query.Replace("@" + p.ParameterName, PrintParameter(p));
+                }
+
+                sw.WriteLine(query);
+            }
+        }
+
+        private static string PrintParameter(SqlParameter parameter)
+        {
+            switch (parameter.DbType)
+            {
+                case DbType.String:
+                    return "'" + parameter.Value.ToString().Replace("'", "''") + "'";
+                case DbType.DateTime:
+                    return String.Format("CAST(N'{0:u}' AS DateTime)", parameter.Value).Replace("Z", "");
+                default:
+                    return parameter.Value.ToString();
+            }
+        }
+
+        private static void UpdateChartDataInDatabase(IEnumerable<ChartData> values, string fileName = "")
+        {
+
+            using (
+                var sw = !String.IsNullOrEmpty(fileName) && Settings.Default.PrintSql
+                    ? new StreamWriter(fileName)
+                    : null)
+            {
+                using (
+                    var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString)
+                    )
+                {
+                    sqlConnection.Open();
+                    using (var command = sqlConnection.CreateCommand())
                     {
 
-                        command.Parameters.Clear();
-                        command.Parameters.AddRange(new[]
+                        foreach (var indicatorValue in values)
+                        {
+
+                            if (!String.IsNullOrEmpty(indicatorValue.Id))
+                            {
+
+
+                                command.CommandText =
+                                    "Update [dbo].[Chart] set ChartSourceTitle = @v1, ChartSourceLink = @v2 where chartid = @v3";
+
+                                command.Parameters.Clear();
+                                command.Parameters.AddRange(new[]
                                 {
-                                    new SqlParameter("v1", indicatorValue.IndicatorId),
-                                    new SqlParameter("v2", indicatorValue.CountryId),
-                                    new SqlParameter("v3", indicatorValue.Year),
-                                    new SqlParameter("v4", indicatorValue.Value)
+                                    new SqlParameter("v1", indicatorValue.SourceTitle),
+                                    new SqlParameter("v2", indicatorValue.SourceLink),
+                                    new SqlParameter("v3", indicatorValue.Id),
                                 });
-                        command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                                PrintSql(command, sw);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void LoadValuesToDatabase(IEnumerable<IndicatorValue> values, bool truncateTable, string fileName = "")
+        {
+            using (var sw = !String.IsNullOrEmpty(fileName) && Settings.Default.PrintSql ? new StreamWriter(fileName) : null)
+            {
+                using (
+                    var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString)
+                    )
+                {
+                    sqlConnection.Open();
+                    using (var command = sqlConnection.CreateCommand())
+                    {
+                        if (truncateTable)
+                        {
+                            command.CommandText =
+                                "truncate table indicatorvaluestag";
+                            command.ExecuteNonQuery();
+                            PrintSql(command, sw);
+                        }
+
+                        command.CommandText =
+                            "insert into indicatorvaluestag(indicatorid, countryid, year, indicatorvalue) values(@v1, @v2, @v3, @v4)";
+                        foreach (var indicatorValue in values)
+                        {
+
+                            command.Parameters.Clear();
+                            command.Parameters.AddRange(new[]
+                            {
+                                new SqlParameter("v1", indicatorValue.IndicatorId),
+                                new SqlParameter("v2", indicatorValue.CountryId),
+                                new SqlParameter("v3", indicatorValue.Year),
+                                new SqlParameter("v4", indicatorValue.Value)
+                            });
+                            command.ExecuteNonQuery();
+                            PrintSql(command, sw);
+                        }
                     }
                 }
             }
