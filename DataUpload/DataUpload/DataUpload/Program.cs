@@ -270,7 +270,7 @@ namespace DataUpload
                     invalidCountries.Clear();
                 }
 
-                LoadProjectsToDatabase(loadCandidates, truncateTable, fileName.Replace(".xlsx", ".sql"));
+                LoadProjectsToDatabase(loadCandidates, truncateTable, DateTime.Now.ToString("yyyyMMdd") + "_" + fileName.Replace(".xlsx", ".sql"));
                 
             }
         }
@@ -430,7 +430,7 @@ namespace DataUpload
                     i++;
                 }
 
-                LoadValuesToDatabase(loadCandidates, truncateTable, fileName.Replace(".xlsx", ".sql"));
+                LoadValuesToDatabase(loadCandidates, truncateTable, DateTime.Now.ToString("yyyyMMdd") +"_" + fileName.Replace(".xlsx", ".sql"));
             }
         }
 
@@ -441,6 +441,7 @@ namespace DataUpload
                     ? new StreamWriter(fileName)
                     : null)
             {
+                if (sw != null) sw.WriteLine("/*{0}*/", fileName);
                 using (
                     var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString)
                     )
@@ -482,8 +483,19 @@ namespace DataUpload
                                         ? new SqlParameter("v8", DBNull.Value)
                                         : new SqlParameter("v8", indicatorValue.Amount.Value),
                                 });
-                                command.ExecuteNonQuery();
-                                PrintSql(command, sw);
+                                try
+                                {
+                                    command.ExecuteNonQuery();
+                                    PrintSql(command, sw);
+                                }
+                                catch (SqlException e)
+                                {
+                                    if (e.Number != 2627)
+                                    {
+                                        throw;
+                                    }
+
+                                }
                             }
                         }
                     }
@@ -565,6 +577,7 @@ namespace DataUpload
         {
             using (var sw = !String.IsNullOrEmpty(fileName) && Settings.Default.PrintSql ? new StreamWriter(fileName) : null)
             {
+                if (sw != null) sw.WriteLine("/*{0}*/", fileName);
                 using (
                     var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString)
                     )
@@ -593,8 +606,38 @@ namespace DataUpload
                                 new SqlParameter("v3", indicatorValue.Year),
                                 new SqlParameter("v4", indicatorValue.Value)
                             });
-                            command.ExecuteNonQuery();
-                            PrintSql(command, sw);
+
+                            try
+                            {
+                                command.ExecuteNonQuery();
+                                PrintSql(command, sw);
+                            }
+                            catch (SqlException e)
+                            {
+                                if (e.Number != 2627)
+                                {
+                                    throw;
+                                }
+                                else
+                                {
+                                    using (var command2 = sqlConnection.CreateCommand())
+                                    {
+                                        command2.CommandText =
+                                            "update indicatorvaluestag set indicatorvalue=@v4 where indicatorid=@v1 and countryid=@v2 and year=@v3";
+                                        command2.Parameters.AddRange(new[]
+                                        {
+                                            new SqlParameter("v1", indicatorValue.IndicatorId),
+                                            new SqlParameter("v2", indicatorValue.CountryId),
+                                            new SqlParameter("v3", indicatorValue.Year),
+                                            new SqlParameter("v4", indicatorValue.Value)
+                                        });
+                                        command2.ExecuteNonQuery();
+                                        PrintSql(command2, sw);
+                                    }
+
+                                }
+                            }
+                            
                         }
                     }
                 }
