@@ -65,3 +65,4 @@ Yemen, Republic of;Yemen, Rep.
 Macedonia, former Yugoslav Republic of;Macedonia, FYR
 Bosnia and Herzegovi;Bosnia and Herzegovina
 Egypt, Arab Republic;Egypt, Arab Rep.
+Cote D'Ivoire;Cote d'Ivoire
