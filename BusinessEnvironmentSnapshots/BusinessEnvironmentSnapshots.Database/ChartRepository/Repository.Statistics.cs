@@ -111,7 +111,7 @@ namespace BusinessEnvironmentSnapshots.Database.ChartRepository
                             stat = result.Stats.TotalInvestment;
                             stat.ValueSuffix = "%";
                             break;
-                        case "Poverty headcount ratio at $1.25 a day (PPP) (% of population)":
+                        case "Poverty headcount ratio at $1.90 a day (PPP) (% of population)":
                             stat = result.Stats.PopulationUnder;
                             stat.ValueSuffix = "%";
                             break;

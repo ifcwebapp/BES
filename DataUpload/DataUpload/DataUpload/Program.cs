@@ -85,7 +85,8 @@ namespace DataUpload
         {
             Logger.Setup();
             log = LogManager.GetLogger("default");
-            var truncateTable = args.Length == 2 || (args.Length > 2 && Boolean.Parse(args[2]));
+            var truncateTableArgument = true;
+            var truncateTable = args.Length == 2 || (args.Length > 2 && Boolean.TryParse(args[2], out truncateTableArgument) && truncateTableArgument);
             try
             {
                 if (args.Length < 2)
@@ -105,6 +106,9 @@ namespace DataUpload
                     case "chartData":
                         UpdateChartData(args[1]);
                         break;
+                    case "createSqlScript":
+                        CreateSqlScript(args[1]);
+                        break;
                 }
 
                 log.Info("Load is completed");
@@ -114,6 +118,34 @@ namespace DataUpload
                 log.Error(e.ToString());
             }
 
+        }
+
+        private static void CreateSqlScript(string listFile)
+        {
+            var files = new List<string>();
+            using (var sr = new StreamReader(listFile))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    files.Add(line);
+                }
+            }
+            using (var sw = new StreamWriter("all.sql"))
+            {
+
+                foreach (var file in files)
+                {
+                    using (var sr = new StreamReader(file))
+                    {
+                        var data = sr.ReadToEnd();
+
+                        sw.WriteLine("/**** {0} */", file);
+                        sw.Write(data);
+                        sw.WriteLine();
+                    }
+                }
+            }
         }
 
         private static DateTime? ParseTime(string s, int rowIndex)
@@ -453,7 +485,7 @@ namespace DataUpload
                         {
                             command.CommandText = "truncate table BankProjectStag";
                             command.ExecuteNonQuery();
-                            PrintSql(command, sw);
+                            //PrintSql(command, sw);
                         }
                         foreach (var indicatorValue in values)
                         {
@@ -590,7 +622,7 @@ namespace DataUpload
                             command.CommandText =
                                 "truncate table indicatorvaluestag";
                             command.ExecuteNonQuery();
-                            PrintSql(command, sw);
+                            //PrintSql(command, sw);
                         }
 
                         command.CommandText =
