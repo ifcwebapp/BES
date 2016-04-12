@@ -27,7 +27,7 @@ You need to:
     - Follow the instructions from https://github.com/Microsoft/TypeScript on how to build a local version (jake local)
     - Make sure you have `tsc.js` and `typescriptServices.js` in the `built/local` folder of the repository
   - or
-    - Get compiled JavaScript files from https://app.box.com/files/0/f/3338689128/1/f_34630741403
+    - Get compiled JavaScript files from typescript folder
     - Extract `tsc.js` and `typescriptServices.js` from the downloaded zip file
 - Make a backup copy of `C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.5\tsc.js`
 - Copy `tsc.js` to `C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.5\`
